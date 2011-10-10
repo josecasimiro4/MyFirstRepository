@@ -13,28 +13,28 @@ public class Dispenser {
 	
 	private static final int TIMEOUT = 2000;
 	
-	public boolean eject(int prod){
-		long  time = Time.getTimeInMillis();
-		boolean ret = true;
-		while(!ready() ){
-			return calcTimeOut(time,time=Time.getTimeInMillis());
-		}	
-		
-		OutputManager.setBits(DATA, prod,DATA_POS);
-		OutputManager.setMask(EJECT);
-		
-		time = Time.getTimeInMillis();
-		
-		while(ready())
-			return calcTimeOut(time,time=Time.getTimeInMillis());
-		
-		OutputManager.clearMask(EJECT);
-		
+	public boolean eject(int prod){		
+		boolean ret=false;
+		if(waitWhileReadyIs(false)){		
+			OutputManager.setBits(DATA, prod,DATA_POS);
+			OutputManager.setMask(EJECT);
+			
+			ret = waitWhileReadyIs(true);
+			
+			OutputManager.clearMask(EJECT);
+		}		
 		return ret;
 	}
 	
-	private boolean calcTimeOut(long timeLast, long timeCurr ){		
-		return timeLast+TIMEOUT < timeCurr;
+	private boolean waitWhileReadyIs(boolean b){
+		long  time = Time.getTimeInMillis();
+		while(ready() == b ){
+			if(time+TIMEOUT < (time=Time.getTimeInMillis())){
+				return false;
+			}
+		}
+		return true;
+		
 	}
 	
 	private boolean ready(){
