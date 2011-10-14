@@ -10,7 +10,7 @@ public class OutputManager {
 		NotUsbPort.out(input);
 	}
 	
-	public static void setBits(int mask, int pos, int val){
+	public static void setBits(int mask, int val, int pos){
 		_image &= ~mask;
 		_image |= val<<pos;
 		
