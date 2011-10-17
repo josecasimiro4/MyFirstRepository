@@ -1,0 +1,89 @@
+/* ---------- Header Session ---------*/
+Name		Transmissor;
+PartNo		00;
+Date		28-9-2011;
+Revision	01;
+Designer	Engenheiro;
+Company		ISEL;
+Assembly	None;
+Location	Lisboa;
+Device		v750c;
+/* ---------- Pin Session ---------*/
+
+PIN 1 = MCLK;
+PIN 2 = MIck;
+PIN 3 = MIxD;
+//PIN 9 = CLEAR;
+
+//OUTPUT PINS
+
+PINNODE 25 = Q0;
+PINNODE 26  = !Q1;
+PINNODE 27  = !Q2;
+PINNODE 28  = !Q3;
+PINNODE 29 = !Q4;
+PINNODE 30 = !Q5;
+
+PIN 23 = CLEAR;
+PIN 22 = BUSY;
+PIN 21 = DISP;
+PIN 20 = LCD;
+PIN 19 = D0;
+PIN 18 = D1;
+PIN 17 = D2;
+PIN 16 = LnDS;
+
+/* ---------- Program Session ---------*/
+
+[Q5..0].ar=!CLEAR;
+[Q5..0].sp='b'0;
+[Q5..0].ck=MIck;
+
+[D2..0].ar ='b'0;
+[D2..0].sp ='b'0;
+[D2..0].ck =MCLK;
+
+Q0.d = MIxD;
+Q1.d = !Q0;
+Q2.d = Q1;
+Q3.d = Q2;
+Q4.d = Q3;
+Q5.d = Q4;
+LnDS = Q5;
+
+SEQUENCE [D2,D1,D0]
+{
+        PRESENT 0
+            IF MIxD NEXT 1;
+            NEXT 0;                    
+        PRESENT 1
+            OUT CLEAR;
+            IF MIxD NEXT 1;
+            IF !MIck NEXT 2;
+            NEXT 0;
+        PRESENT 2
+            IF LnDS NEXT 3;
+            NEXT 2;
+        PRESENT 3
+            IF MIck NEXT 4;
+            NEXT 3;
+        PRESENT 4
+            IF !MIck NEXT 5;
+            NEXT 4;
+        PRESENT 5
+            OUT BUSY;
+            IF LnDS NEXT 6;
+            NEXT 7;  
+        PRESENT 6
+            OUT LCD, BUSY;
+            NEXT 0;
+        PRESENT 7
+            OUT DISP, BUSY;
+            NEXT 0;
+
+
+}
+
+
+
+
