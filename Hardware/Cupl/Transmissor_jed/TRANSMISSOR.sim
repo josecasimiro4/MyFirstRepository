@@ -1,0 +1,182 @@
+%SIGNAL
+PIN  22 =  BUSY 
+PIN  23 =  CLEAR 
+PIN  27 =  D0 
+PIN  28 =  D1 
+PIN  29 =  D2 
+PIN  21 =  DISP 
+PIN   4 =  FINISH 
+PIN  20 =  LCD 
+PIN   1 =  MCLK 
+PIN   2 =  MIck 
+PIN   3 =  MIxD 
+PIN  30 =  Q0 
+PIN  18 =  Q1 
+PIN  17 =  Q2 
+PIN  16 =  Q3 
+PIN  15 =  Q4 
+PIN  14 =  Q5 
+PIN  19 =  notQ0 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BUSY =>
+    D0 & D2
+  # !D0 & D1 & D2
+
+CLEAR =>
+    D0 & !D1 & !D2
+
+D0.d  =>
+    !D1 & !D2 & MIxD
+  # D1 & D2 & !FINISH
+  # !D0 & D1 & !D2 & Q5
+  # D0 & D1 & !D2 & !MIck
+  # !D0 & !D1 & D2 & !MIck & Q5
+
+D0.ar  =>
+    0 
+
+D0.ck  =>
+    MCLK
+
+D0.sp D1.sp D2.sp Q0.sp Q1.sp Q2.sp Q3.sp Q4.sp Q5.sp  =>
+    0 
+
+D1.d  =>
+    D0 & D1 & D2 & !FINISH
+  # D0 & !D1 & !D2 & !MIck & !MIxD
+  # !D0 & D1
+  # D0 & D1 & !D2 & !MIck
+  # !D0 & !D1 & D2 & !MIck & !Q5
+
+D1.ar  =>
+    0 
+
+D1.ck  =>
+    MCLK
+
+D1.sp  =>
+    
+D2.d  =>
+    D0 & D1 & D2 & !FINISH
+  # D0 & D1 & !D2 & MIck
+  # !D0 & D2
+
+D2.ar  =>
+    0 
+
+D2.ck  =>
+    MCLK
+
+D2.sp  =>
+    
+DISP =>
+    D0 & D1 & D2
+
+LCD =>
+    D0 & !D1 & D2
+
+Q0.d  =>
+    !MIxD
+
+Q0.ar  =>
+    CLEAR
+
+Q0.ck  =>
+    !MIck
+
+Q0.sp  =>
+    
+Q1.d  =>
+    !Q0
+
+Q1.ar  =>
+    CLEAR
+
+Q1.ck  =>
+    !MIck
+
+Q1.sp  =>
+    
+Q2.d  =>
+    Q1
+
+Q2.ar  =>
+    CLEAR
+
+Q2.ck  =>
+    !MIck
+
+Q2.sp  =>
+    
+Q3.d  =>
+    Q2
+
+Q3.ar  =>
+    CLEAR
+
+Q3.ck  =>
+    !MIck
+
+Q3.sp  =>
+    
+Q4.d  =>
+    Q3
+
+Q4.ar  =>
+    CLEAR
+
+Q4.ck  =>
+    !MIck
+
+Q4.sp  =>
+    
+Q5.d  =>
+    Q4
+
+Q5.ar  =>
+    CLEAR
+
+Q5.ck  =>
+    !MIck
+
+Q5.sp  =>
+    
+notQ0 =>
+    !Q0
+
+BUSY.oe  =>
+    1 
+
+CLEAR.oe  =>
+    1 
+
+DISP.oe  =>
+    1 
+
+LCD.oe  =>
+    1 
+
+Q1.oe  =>
+    1 
+
+Q2.oe  =>
+    1 
+
+Q3.oe  =>
+    1 
+
+Q4.oe  =>
+    1 
+
+Q5.oe  =>
+    1 
+
+notQ0.oe  =>
+    1 
+
+%END
