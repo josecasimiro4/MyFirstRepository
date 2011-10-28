@@ -5,7 +5,7 @@ public class OutputManager {
 
 	private static int _image=0x0;
 	
-	public static void setNibble(int input){
+	public static void setByte(int input){
 		_image = input;
 		NotUsbPort.out(input);
 	}
