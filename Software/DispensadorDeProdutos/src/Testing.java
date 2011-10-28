@@ -7,9 +7,12 @@ public class Testing {
 	
 	public static void main (String[] args){
 		
+		System.out.println("Initiating..");
 		LCD.init();
-		LCD.writeString("Its alive!");
+		System.out.println("Initiated");
 		
+		//LCD.writeString("Its alive!");
+		LCD.writeChar('c');
 		
 	}
 }

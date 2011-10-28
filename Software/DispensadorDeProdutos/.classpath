@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Ze/Desktop/isel/I1112/LIC/Libs/usbport.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ze/Desktop/isel/I1112/LIC/repositoryGIT/RepositoryGIT/Software/DispensadorDeProdutos/usbport.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
