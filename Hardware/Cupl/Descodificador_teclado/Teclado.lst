@@ -1,0 +1,104 @@
+LISTING FOR LOGIC DESCRIPTION FILE: Teclado.pld                      Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Oct 24 17:26:05 2011
+
+  1:/* ---------- Header Session ---------*/
+  2:Name            Teclado;
+  3:PartNo          00;
+  4:Date            24-10-2011;
+  5:Revision        01;
+  6:Designer        Engenheiro;
+  7:Company         ISEL;
+  8:Assembly        None;
+  9:Location        Lisboa;
+ 10:Device          v750c;
+ 11:/* ---------- Pin Session ---------*/
+ 12:
+ 13:PIN 1 = MCK;
+ 14:
+ 15:PIN 6 = MUX_IN0;
+ 16:PIN 7 = MUX_IN1;
+ 17:PIN 8 = MUX_IN2;
+ 18:PIN 9 = MUX_IN3;
+ 19:PIN 10 = K_ACK;
+ 20:
+ 21:
+ 22:
+ 23:PINNODE 29 = X1;
+ 24:PINNODE 30 = X0;
+ 25:
+ 26:PIN 23 = C0;
+ 27:PIN 22 = C1;
+ 28:PIN 21 = C2;
+ 29:PIN 20 = C3;
+ 30:PIN 19 = K_VAL;
+ 31:PIN 18 = MUX_OUT;
+ 32:PIN 17 = !DECODE0;
+ 33:PIN 16 = !DECODE1;
+ 34:PIN 15 = !DECODE2;
+ 35:PIN 14 = !DECODE3;
+ 36:/* ---------- Program Session ---------*/
+ 37:
+ 38:MUX_OUT = (!C1 & !C0 & MUX_IN0) # (!C1 & C0 & MUX_IN1) # (C1 & !C0 & MUX_IN2) # (C1 & C0 & MUX_IN3);
+ 39:
+ 40:DECODE0 = !C3 & !C2;
+ 41:DECODE1 = !C3 & C2;
+ 42:DECODE2 = C3 & !C2;
+ 43:DECODE3 = C3 & C2;
+ 44:
+ 45:[C0..3].ar = 'b' 0;
+ 46:[C0..3].sp = 'b' 0;
+ 47:
+ 48:[C0..1].ck = MCK;
+ 49:[C2..3].ck = !MCK;
+ 50:
+ 51:[X1..0].ar = 'b' 0;
+ 52:[X1..0].sp = 'b' 0;
+ 53:[X1..0].ck = MCK;
+
+LISTING FOR LOGIC DESCRIPTION FILE: Teclado.pld                      Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Oct 24 17:26:05 2011
+
+ 54:
+ 55:
+ 56:C0.d = C0 $ CE0;
+ 57:C1.d = C1 $(C0& CE0); 
+ 58:
+ 59:C2.d = C2 $ CE1;
+ 60:C3.d = C3 $(C2& CE1); 
+ 61:
+ 62:AND_LINE = MUX_IN0 & MUX_IN1 & MUX_IN2 & MUX_IN3;
+ 63:
+ 64:SEQUENCE [X1,X0]{
+ 65:        PRESENT 0:
+ 66:                OUT CE0,CE1;
+ 67:                IF !AND_LINE NEXT 1;
+ 68:                DEFAULT NEXT 0;
+ 69:        PRESENT 1:
+ 70:                OUT CE0;
+ 71:                IF !MUX_OUT next 2;
+ 72:                DEFAULT NEXT 1;
+ 73:        PRESENT 2:
+ 74:                OUT K_VAL;
+ 75:                IF K_ACK NEXT 3;
+ 76:                DEFAULT NEXT 2;
+ 77:        PRESENT 3:
+ 78:                IF !K_ACK & MUX_OUT NEXT 0;
+ 79:                DEFAULT NEXT 3;
+ 80:
+ 81:}
+ 82:
+ 83:
+ 84:
+
+
+
+Jedec Fuse Checksum       (f736)
+Jedec Transmit Checksum   (caab)
