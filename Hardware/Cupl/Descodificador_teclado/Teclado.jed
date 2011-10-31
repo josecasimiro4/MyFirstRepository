@@ -1,7 +1,7 @@
 
-CUPL(WM)        5.0a  Serial# MW-10400000
+CUPL(WM)        5.0a  Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Mon Oct 24 17:26:05 2011
+Created         Mon Oct 31 15:27:34 2011
 Name            Teclado
 Partno          00
 Revision        01
@@ -162,4 +162,4 @@ Location        Lisboa
 *L14368 01001001111111100100100100000000
 *L14432 00000110000001100000000000000000
 *CF736
-*CAAB
+*C9EB

@@ -1,0 +1,171 @@
+%SIGNAL
+PIN  23 =  C0 
+PIN  22 =  C1 
+PIN  21 =  C2 
+PIN  20 =  C3 
+PIN  17 = !DECODE0 
+PIN  16 = !DECODE1 
+PIN  15 = !DECODE2 
+PIN  14 = !DECODE3 
+PIN  10 =  K_ACK 
+PIN  19 =  K_VAL 
+PIN   1 =  MCK 
+PIN   6 =  MUX_IN0 
+PIN   7 =  MUX_IN1 
+PIN   8 =  MUX_IN2 
+PIN   9 =  MUX_IN3 
+PIN  18 =  MUX_OUT 
+PIN  30 =  X0 
+PIN  29 =  X1 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+AND_LINE =>
+    MUX_IN0 & MUX_IN1 & MUX_IN2 & MUX_IN3
+
+C0.d  =>
+    C0 & X1
+  # !C0 & !X1
+
+C0.ar  =>
+    0 
+
+C0.ck  =>
+    MCK
+
+C0.sp C1.sp C2.sp C3.sp X0.sp X1.sp  =>
+    0 
+
+C1.d  =>
+    !C0 & C1
+  # C1 & X1
+  # C0 & !C1 & !X1
+
+C1.ar  =>
+    0 
+
+C1.ck  =>
+    MCK
+
+C1.sp  =>
+    
+C2.d  =>
+    C2 & X1
+  # C2 & X0
+  # !C2 & !X0 & !X1
+
+C2.ar  =>
+    0 
+
+C2.ck  =>
+    !MCK
+
+C2.sp  =>
+    
+C3.d  =>
+    !C2 & C3
+  # C3 & X1
+  # C3 & X0
+  # C2 & !C3 & !X0 & !X1
+
+C3.ar  =>
+    0 
+
+C3.ck  =>
+    !MCK
+
+C3.sp  =>
+    
+CE0 =>
+    !X1
+
+CE1 =>
+    !X0 & !X1
+
+DECODE0 =>
+    !C2 & !C3
+
+DECODE1 =>
+    C2 & !C3
+
+DECODE2 =>
+    !C2 & C3
+
+DECODE3 =>
+    C2 & C3
+
+K_VAL =>
+    !X0 & X1
+
+MUX_OUT =>
+    !C0 & !C1 & MUX_IN0
+  # C0 & !C1 & MUX_IN1
+  # !C0 & C1 & MUX_IN2
+  # C0 & C1 & MUX_IN3
+
+X0.d  =>
+    !MUX_IN0 & !X0 & !X1
+  # !MUX_IN1 & !X0 & !X1
+  # !MUX_IN3 & !X0 & !X1
+  # !MUX_IN2 & !X0 & !X1
+  # K_ACK & X0 & X1
+  # MUX_OUT & X0 & !X1
+  # K_ACK & !X0 & X1
+  # !MUX_OUT & X0 & X1
+
+X0.ar  =>
+    0 
+
+X0.ck  =>
+    MCK
+
+X0.sp  =>
+    
+X1.d  =>
+    K_ACK & X0 & X1
+  # !MUX_OUT & X0 & !X1
+  # !X0 & X1
+  # !MUX_OUT & X0 & X1
+
+X1.ar  =>
+    0 
+
+X1.ck  =>
+    MCK
+
+X1.sp  =>
+    
+C0.oe  =>
+    1 
+
+C1.oe  =>
+    1 
+
+C2.oe  =>
+    1 
+
+C3.oe  =>
+    1 
+
+DECODE0.oe  =>
+    1 
+
+DECODE1.oe  =>
+    1 
+
+DECODE2.oe  =>
+    1 
+
+DECODE3.oe  =>
+    1 
+
+K_VAL.oe  =>
+    1 
+
+MUX_OUT.oe  =>
+    1 
+
+%END
