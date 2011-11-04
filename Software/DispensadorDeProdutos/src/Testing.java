@@ -11,8 +11,8 @@ public class Testing {
 		LCD.init();
 		System.out.println("Initiated");
 		
-		//LCD.writeString("Its alive!");
-		LCD.writeChar('c');
+		LCD.writeString("Its alive!");
+	
 		
 	}
 }

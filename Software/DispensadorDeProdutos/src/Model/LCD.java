@@ -6,9 +6,14 @@ import Utils.OutputManager;
 
 public class LCD {
 
+	private static final boolean SYNC = false;
+	
+	private static final int MIXD = 0x1;
 	private static final int ENABLE = 0x2;
 	private static final int RS = 0x4;
+	private static final int MICK = 0x8;	
 	private static final int NIBBLE_DATA_MASK = 0XF0;
+	
 	private static final int DATA_POS = MaskManager.calcPosFromMask(NIBBLE_DATA_MASK);
 	private static final boolean COMMAND_MODE = false;
 	private static final boolean CHAR_MODE = true;
@@ -25,7 +30,7 @@ public class LCD {
 		writeCommand(0x2C);
 		writeCommand(0x08);
 		writeCommand(0x01);
-		writeCommand(0x07);
+		writeCommand(0x06);
 		
 		//display enable
 		writeCommand(0X0F);		
@@ -37,6 +42,10 @@ public class LCD {
 		}
 	}
 	
+	public static void setCursor(int line, int col){
+		
+	}
+	
 	public static void writeChar(char c){
 		writeByte((byte) c,CHAR_MODE);
 	}
@@ -46,21 +55,54 @@ public class LCD {
 	}
 	
 	private static void writeByte(byte bt, boolean rs){
-		writeNibble((byte)((bt &0XF0)>>4), rs);
+		writeNibble((byte)(bt >>4), rs);
 		writeNibble((byte)(bt & 0XF), rs);				
 	}
 	
 	private static void writeNibble(byte nibble, boolean rs){
+		if(SYNC){
+	 		if(rs)
+	 			OutputManager.setMask(RS); 		
+	 	    else 
+	 	    	OutputManager.clearMask(RS);
+	 		
+			OutputManager.setBits(NIBBLE_DATA_MASK, nibble, DATA_POS);
+			
+			OutputManager.setMask(ENABLE);
+			OutputManager.clearMask(ENABLE);
+		}else{
+			waitForNotBusy();
+			
+			OutputManager.clearMask(MICK);
+			
+			OutputManager.clearMask(MIXD);
+				
+			sendSyncBitToMIxD(true);				
+			sendSyncBitToMIxD(rs);			
+			sendSyncBitToMIxD((nibble & 0x1) != 0);			
+			sendSyncBitToMIxD((nibble & 0x2) != 0);			
+			sendSyncBitToMIxD((nibble & 0x4) != 0);			
+			sendSyncBitToMIxD((nibble & 0x8) != 0);
+			
+			OutputManager.setMask(MIXD);
+			
+		}
+	}
 
- 		if(rs)
- 			OutputManager.setMask(RS); 		
- 	    else 
- 	    	OutputManager.clearMask(RS);
- 		
-		OutputManager.setBits(NIBBLE_DATA_MASK, nibble, DATA_POS);
+	private static void sendSyncBitToMIxD(boolean b) {
+		OutputManager.setMask(MICK);
 		
-		OutputManager.setMask(ENABLE);
-		OutputManager.clearMask(ENABLE);
+		if(b)
+			OutputManager.setMask(MIXD);
+		else
+			OutputManager.clearMask(MIXD);
+		
+		OutputManager.clearMask(MICK);
+		
+	}
+
+	private static void waitForNotBusy() {
+		// TODO Auto-generated method stub
 		
 	}
 	
