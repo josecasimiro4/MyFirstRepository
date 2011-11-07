@@ -6,7 +6,7 @@ import Utils.OutputManager;
 
 public class LCD {
 
-	private static final boolean SYNC = false;
+	private static final boolean PARALLEL = false;
 	
 	private static final int MIXD = 0x1;
 	private static final int ENABLE = 0x2;
@@ -18,7 +18,11 @@ public class LCD {
 	private static final boolean COMMAND_MODE = false;
 	private static final boolean CHAR_MODE = true;
 
+	private static final int NIBBLE_SIZE = 4;
+
 	public static void init(){
+		OutputManager.setMask(MIXD);
+		
 		Time.sleep(15);
 		writeNibble((byte)0x3,COMMAND_MODE);
 		Time.sleep(4);		
@@ -60,7 +64,7 @@ public class LCD {
 	}
 	
 	private static void writeNibble(byte nibble, boolean rs){
-		if(SYNC){
+		if(PARALLEL){
 	 		if(rs)
 	 			OutputManager.setMask(RS); 		
 	 	    else 
@@ -71,25 +75,25 @@ public class LCD {
 			OutputManager.setMask(ENABLE);
 			OutputManager.clearMask(ENABLE);
 		}else{
-			waitForNotBusy();
+			//waitForNotBusy();
 			
 			OutputManager.clearMask(MICK);
 			
 			OutputManager.clearMask(MIXD);
 				
-			sendSyncBitToMIxD(true);				
-			sendSyncBitToMIxD(rs);			
-			sendSyncBitToMIxD((nibble & 0x1) != 0);			
-			sendSyncBitToMIxD((nibble & 0x2) != 0);			
-			sendSyncBitToMIxD((nibble & 0x4) != 0);			
-			sendSyncBitToMIxD((nibble & 0x8) != 0);
+			sendBitToMIxDSer(true);				
+			sendBitToMIxDSer(rs);
+			
+			for(int i=0;i<NIBBLE_SIZE;++i)
+				sendBitToMIxDSer(((nibble>>i)&0x1)==1);
 			
 			OutputManager.setMask(MIXD);
 			
 		}
+		
 	}
 
-	private static void sendSyncBitToMIxD(boolean b) {
+	private static void sendBitToMIxDSer(boolean b) {
 		OutputManager.setMask(MICK);
 		
 		if(b)
