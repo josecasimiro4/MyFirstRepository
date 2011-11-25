@@ -1,11 +1,11 @@
-{COMPONENT D:\FACUL\JED\TRANSMISSOR.SYM
+{COMPONENT C:\LIC\LIC_SOFTWARE\MYFIRSTREPOSITORY\HARDWARE\CUPL\TRANSMISSOR_JED\TRANSMISSOR.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Mon Oct 17 15:39:01 2011 "}
+  {DBtime "Fri Nov 25 18:38:39 2011 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -34,13 +34,13 @@
   {PIN_DEF
    [Ly "PINCON"]
    {P MCLK {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P MICK {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P MICK' {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
    {P MIXD {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P FINISH {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P NOTQ0 {Pt "I/O"}{Lq 0}{Ploc 310 20}}
    {P LCD {Pt "I/O"}{Lq 0}{Ploc 310 40}}
-   {P DISP {Pt "I/O"}{Lq 0}{Ploc 310 60}}
-   {P BUSY {Pt "I/O"}{Lq 0}{Ploc 310 80}}
+   {P BUSY {Pt "I/O"}{Lq 0}{Ploc 310 60}}
+   {P DISP {Pt "I/O"}{Lq 0}{Ploc 310 80}}
    {P CLEAR {Pt "I/O"}{Lq 0}{Ploc 310 100}}
    {P Q5 {Pt "OUTPUT"}{Lq 0}{Ploc 310 120}}
    {P Q4 {Pt "OUTPUT"}{Lq 0}{Ploc 310 140}}
@@ -82,7 +82,8 @@
    {R 130 220 280 0}
    {L 130 100 100 100}
    {L 130 110 140 100 130 90}
-   {L 130 60 100 60}
+   {L 120 60 100 60}
+   {C 125 60 5}
    {L 130 40 100 40}
    {L 130 20 100 20}
    {L 280 20 310 20}
@@ -98,14 +99,14 @@
    [Ly "PINNAM"]
    [Tj "LC"]
    {T "MCLK" 140 100}
-   {T "MICK" 140 60}
+   {T "MICK'" 140 60}
    {T "MIXD" 140 40}
    {T "FINISH" 140 20}
    [Tj "RC"]
    {T "NOTQ0" 270 20}
    {T "LCD" 270 40}
-   {T "DISP" 270 60}
-   {T "BUSY" 270 80}
+   {T "BUSY" 270 60}
+   {T "DISP" 270 80}
    {T "CLEAR" 270 100}
    {T "Q5" 270 120}
    {T "Q4" 270 140}
@@ -125,7 +126,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD D:\FACUL\JED\TRANSMISSOR 205 220}
+    {At PLD C:\LIC\LIC_SOFTWARE\MYFIRSTREPOSITORY\HARDWARE\CUPL\TRANSMISSOR_JED\TRANSMISSOR 205 220}
    }
   }
  }
@@ -137,7 +138,7 @@
   {NET_DEF
    {N MCLK
    }
-   {N MICK
+   {N MICK'
    }
    {N MIXD
    }
@@ -147,9 +148,9 @@
    }
    {N LCD
    }
-   {N DISP
-   }
    {N BUSY
+   }
+   {N DISP
    }
    {N CLEAR
    }

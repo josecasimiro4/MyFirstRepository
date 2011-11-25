@@ -1,14 +1,14 @@
 %SIGNAL
-PIN  22 =  BUSY 
+PIN  21 =  BUSY 
 PIN  23 =  CLEAR 
 PIN  27 =  D0 
 PIN  28 =  D1 
 PIN  29 =  D2 
-PIN  21 =  DISP 
+PIN  22 =  DISP 
 PIN   4 =  FINISH 
 PIN  20 =  LCD 
 PIN   1 =  MCLK 
-PIN   2 =  MIck 
+PIN   2 = !MIck 
 PIN   3 =  MIxD 
 PIN  30 =  Q0 
 PIN  18 =  Q1 
@@ -24,18 +24,18 @@ PIN  19 =  notQ0
 
 %EQUATION
 BUSY =>
-    D0 & D2
-  # !D0 & D1 & D2
+    !D0 & D1 & !D2
+  # !D1 & D2
 
 CLEAR =>
     D0 & !D1 & !D2
 
 D0.d  =>
     !D1 & !D2 & MIxD
-  # D1 & D2 & !FINISH
-  # !D0 & D1 & !D2 & Q5
-  # D0 & D1 & !D2 & !MIck
-  # !D0 & !D1 & D2 & !MIck & Q5
+  # !D1 & D2 & !FINISH
+  # D0 & !D1 & !D2 & MIck & !MIxD
+  # D0 & D1 & !D2
+  # D0 & D1 & D2 & MIck
 
 D0.ar  =>
     0 
@@ -47,11 +47,10 @@ D0.sp D1.sp D2.sp Q0.sp Q1.sp Q2.sp Q3.sp Q4.sp Q5.sp  =>
     0 
 
 D1.d  =>
-    D0 & D1 & D2 & !FINISH
-  # D0 & !D1 & !D2 & !MIck & !MIxD
-  # !D0 & D1
-  # D0 & D1 & !D2 & !MIck
-  # !D0 & !D1 & D2 & !MIck & !Q5
+    !D0 & D1 & D2 & !MIck
+  # D0 & !D1 & !D2 & MIck & !MIxD
+  # !D0 & D1 & D2 & MIck & Q5
+  # D0 & D1
 
 D1.ar  =>
     0 
@@ -62,9 +61,12 @@ D1.ck  =>
 D1.sp  =>
     
 D2.d  =>
-    D0 & D1 & D2 & !FINISH
-  # D0 & D1 & !D2 & MIck
-  # !D0 & D2
+    D0 & !D1 & D2 & !FINISH
+  # D0 & D1 & !D2 & Q5
+  # D0 & D1 & D2
+  # !D0 & D1 & D2 & MIck & !Q5
+  # !D0 & D1 & D2 & !MIck
+  # !D0 & !D1 & D2
 
 D2.ar  =>
     0 
@@ -75,10 +77,10 @@ D2.ck  =>
 D2.sp  =>
     
 DISP =>
-    D0 & D1 & D2
+    D0 & !D1 & D2
 
 LCD =>
-    D0 & !D1 & D2
+    !D0 & D1 & !D2
 
 Q0.d  =>
     !MIxD
@@ -87,7 +89,7 @@ Q0.ar  =>
     CLEAR
 
 Q0.ck  =>
-    !MIck
+    MIck
 
 Q0.sp  =>
     
@@ -98,7 +100,7 @@ Q1.ar  =>
     CLEAR
 
 Q1.ck  =>
-    !MIck
+    MIck
 
 Q1.sp  =>
     
@@ -109,7 +111,7 @@ Q2.ar  =>
     CLEAR
 
 Q2.ck  =>
-    !MIck
+    MIck
 
 Q2.sp  =>
     
@@ -120,7 +122,7 @@ Q3.ar  =>
     CLEAR
 
 Q3.ck  =>
-    !MIck
+    MIck
 
 Q3.sp  =>
     
@@ -131,7 +133,7 @@ Q4.ar  =>
     CLEAR
 
 Q4.ck  =>
-    !MIck
+    MIck
 
 Q4.sp  =>
     
@@ -142,7 +144,7 @@ Q5.ar  =>
     CLEAR
 
 Q5.ck  =>
-    !MIck
+    MIck
 
 Q5.sp  =>
     

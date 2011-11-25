@@ -11,7 +11,7 @@ Device		v750c;
 /* ---------- Pin Session ---------*/
 
 PIN 1 = MCLK;
-PIN 2 = MIck;
+PIN 2 = !MIck;
 PIN 3 = MIxD;
 PIN 4 = FINISH;
 
@@ -65,9 +65,9 @@ SEQUENCE [D2,D1,D0]
             DEFAULT NEXT 0;                    
         PRESENT 1
             OUT CLEAR;
-            IF !MIxD & !MIck NEXT 3;
             IF MIxD NEXT 1;
-            DEFAULT NEXT 0;
+            IF !MIxD & !MIck NEXT 3;
+            IF !MIxD & MIck NEXT 0;
         PRESENT 3
             IF Q5 NEXT 7;
             DEFAULT NEXT 3;
