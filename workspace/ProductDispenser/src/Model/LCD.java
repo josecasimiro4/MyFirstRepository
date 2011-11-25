@@ -21,7 +21,6 @@ public class LCD {
 	
 
 	public static void init(){
-		OutputManager.setMask(MIXD);
 		
 		Time.sleep(15);
 		writeNibble((byte)0x3,COMMAND_MODE);

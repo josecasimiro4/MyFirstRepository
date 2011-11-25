@@ -19,14 +19,14 @@ PIN 4 = FINISH;
 
 //OUTPUT PINS
 
-/*PINNODE 27 = D0;
+PINNODE 27 = D0;
 PINNODE 28 = D1;
-PINNODE 29 = D2;*/
+PINNODE 29 = D2;
 PINNODE 30 = Q0;
 
-PIN 23 = D0;
-PIN 22 = D1;
-PIN 21 = D2;
+PIN 23 = CLEAR;
+PIN 22 = DISP;
+PIN 21 = BUSY;
 PIN 20 = LCD;
 
 PIN 19 = notQ0;
@@ -65,34 +65,30 @@ SEQUENCE [D2,D1,D0]
             DEFAULT NEXT 0;                    
         PRESENT 1
             OUT CLEAR;
-            IF !MIxD & !MIck NEXT 2;
+            IF !MIxD & !MIck NEXT 3;
             IF MIxD NEXT 1;
             DEFAULT NEXT 0;
         PRESENT 3
-            IF Q5 NEXT 3;
-            DEFAULT NEXT 2;
-        PRESENT 7
-            IF MIck NEXT 4;
+            IF Q5 NEXT 7;
             DEFAULT NEXT 3;
+        PRESENT 7
+            IF MIck NEXT 6;
+            DEFAULT NEXT 7;
         PRESENT 6
-            IF !MIck & !Q5 NEXT 6;
-	     IF !MIck & Q5 NEXT 5; 	 
-            DEFAULT NEXT 4;        
+            IF !MIck & !Q5 NEXT 4;
+	     IF !MIck & Q5 NEXT 2; 	 
+            DEFAULT NEXT 6;        
         PRESENT 2
             OUT LCD, BUSY;
             DEFAULT NEXT 0;
         PRESENT 4
 	     OUT BUSY;
-	     IF !FINISH NEXT 7;
-            DEFAULT NEXT 6;  
+	     IF !FINISH NEXT 5;
+            DEFAULT NEXT 4;  
         PRESENT 5
             OUT DISP, BUSY;
-	     IF !FINISH NEXT 7; 	
+	     IF !FINISH NEXT 5; 	
             DEFAULT NEXT 0;
 
 
 }
-
-
-
-

@@ -6,6 +6,10 @@ public class Emitter {
 	private static final int MIXD = 0x1;
 	private static final int MICK = 0x8;	
 	
+	public static void init(){
+		OutputManager.setMask(MIXD);
+		OutputManager.setMask(MICK);
+	}
 	public static boolean sendTrama(int bits, int size){
 		/*if(!waitForNotBusy())
 				return false;*/
