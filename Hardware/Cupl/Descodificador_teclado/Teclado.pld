@@ -12,10 +12,10 @@ Device		v750c;
 
 PIN 1 = MCK;
 
-PIN 6 = MUX_IN0;
-PIN 7 = MUX_IN1;
-PIN 8 = MUX_IN2;
-PIN 9 = MUX_IN3;
+PIN 6 = LINE0;
+PIN 7 = LINE1;
+PIN 8 = LINE2;
+PIN 9 = LINE3;
 PIN 10 = K_ACK;
 
 
@@ -23,43 +23,43 @@ PIN 10 = K_ACK;
 PINNODE 29 = X1;
 PINNODE 30 = X0;
 
-PIN 23 = C0;
-PIN 22 = C1;
-PIN 21 = C2;
-PIN 20 = C3;
+PIN 23 = K0;
+PIN 22 = K1;
+PIN 21 = K2;
+PIN 20 = K3;
 PIN 19 = K_VAL;
-PIN 18 = MUX_OUT;
-PIN 17 = !DECODE0;
-PIN 16 = !DECODE1;
-PIN 15 = !DECODE2;
-PIN 14 = !DECODE3;
+PIN 18 = Y;
+PIN 17 = !COL0;
+PIN 16 = !COL1;
+PIN 15 = !COL2;
+PIN 14 = !COL3;
 /* ---------- Program Session ---------*/
 
-MUX_OUT = (!C1 & !C0 & MUX_IN0) # (!C1 & C0 & MUX_IN1) # (C1 & !C0 & MUX_IN2) # (C1 & C0 & MUX_IN3);
+Y = (!K1 & !K0 & LINE0) # (!K1 & K0 & LINE1) # (K1 & !K0 & LINE2) # (K1 & K0 & LINE3);
 
-DECODE0 = !C3 & !C2;
-DECODE1 = !C3 & C2;
-DECODE2 = C3 & !C2;
-DECODE3 = C3 & C2;
+COL0 = !K3 & !K2;
+COL1 = !K3 & K2;
+COL2 = K3 & !K2;
+COL3 = K3 & K2;
 
-[C0..3].ar = 'b' 0;
-[C0..3].sp = 'b' 0;
+[K0..3].ar = 'b' 0;
+[K0..3].sp = 'b' 0;
 
-[C0..1].ck = MCK;
-[C2..3].ck = !MCK;
+[K3..0].ck = MCK;
+
 
 [X1..0].ar = 'b' 0;
 [X1..0].sp = 'b' 0;
-[X1..0].ck = MCK;
+[X1..0].ck = !MCK;
 
 
-C0.d = C0 $ CE0;
-C1.d = C1 $(C0& CE0); 
+K0.d = K0 $ CE0;
+K1.d = K1 $(K0& CE0); 
 
-C2.d = C2 $ CE1;
-C3.d = C3 $(C2& CE1); 
+K2.d = K2 $ CE1;
+K3.d = K3 $(K2& CE1); 
 
-AND_LINE = MUX_IN0 & MUX_IN1 & MUX_IN2 & MUX_IN3;
+AND_LINE = LINE0 & LINE1 & LINE2 & LINE3;
 
 SEQUENCE [X1,X0]{
         PRESENT 0:
@@ -68,14 +68,15 @@ SEQUENCE [X1,X0]{
                 DEFAULT NEXT 0;
         PRESENT 1:
                 OUT CE0;
-                IF !MUX_OUT next 2;
-                DEFAULT NEXT 1;
+                IF !Y & !AND_LINE next 2;
+		  IF AND_LINE NEXT 0;
+                IF Y NEXT 1;
         PRESENT 2:
                 OUT K_VAL;
                 IF K_ACK NEXT 3;
                 DEFAULT NEXT 2;
         PRESENT 3:
-                IF !K_ACK & MUX_OUT NEXT 0;
+                IF !K_ACK & Y NEXT 0;
                 DEFAULT NEXT 3;
 
 }

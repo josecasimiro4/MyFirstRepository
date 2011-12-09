@@ -1,22 +1,22 @@
 %SIGNAL
-PIN  23 =  C0 
-PIN  22 =  C1 
-PIN  21 =  C2 
-PIN  20 =  C3 
-PIN  17 = !DECODE0 
-PIN  16 = !DECODE1 
-PIN  15 = !DECODE2 
-PIN  14 = !DECODE3 
+PIN  17 = !COL0 
+PIN  16 = !COL1 
+PIN  15 = !COL2 
+PIN  14 = !COL3 
+PIN  23 =  K0 
+PIN  22 =  K1 
+PIN  21 =  K2 
+PIN  20 =  K3 
 PIN  10 =  K_ACK 
 PIN  19 =  K_VAL 
+PIN   6 =  LINE0 
+PIN   7 =  LINE1 
+PIN   8 =  LINE2 
+PIN   9 =  LINE3 
 PIN   1 =  MCK 
-PIN   6 =  MUX_IN0 
-PIN   7 =  MUX_IN1 
-PIN   8 =  MUX_IN2 
-PIN   9 =  MUX_IN3 
-PIN  18 =  MUX_OUT 
 PIN  30 =  X0 
 PIN  29 =  X1 
+PIN  18 =  Y 
 %END
 
 %FIELD
@@ -24,148 +24,151 @@ PIN  29 =  X1
 
 %EQUATION
 AND_LINE =>
-    MUX_IN0 & MUX_IN1 & MUX_IN2 & MUX_IN3
+    LINE0 & LINE1 & LINE2 & LINE3
 
-C0.d  =>
-    C0 & X1
-  # !C0 & !X1
-
-C0.ar  =>
-    0 
-
-C0.ck  =>
-    MCK
-
-C0.sp C1.sp C2.sp C3.sp X0.sp X1.sp  =>
-    0 
-
-C1.d  =>
-    !C0 & C1
-  # C1 & X1
-  # C0 & !C1 & !X1
-
-C1.ar  =>
-    0 
-
-C1.ck  =>
-    MCK
-
-C1.sp  =>
-    
-C2.d  =>
-    C2 & X1
-  # C2 & X0
-  # !C2 & !X0 & !X1
-
-C2.ar  =>
-    0 
-
-C2.ck  =>
-    !MCK
-
-C2.sp  =>
-    
-C3.d  =>
-    !C2 & C3
-  # C3 & X1
-  # C3 & X0
-  # C2 & !C3 & !X0 & !X1
-
-C3.ar  =>
-    0 
-
-C3.ck  =>
-    !MCK
-
-C3.sp  =>
-    
 CE0 =>
     !X1
 
 CE1 =>
     !X0 & !X1
 
-DECODE0 =>
-    !C2 & !C3
+COL0 =>
+    !K2 & !K3
 
-DECODE1 =>
-    C2 & !C3
+COL1 =>
+    K2 & !K3
 
-DECODE2 =>
-    !C2 & C3
+COL2 =>
+    !K2 & K3
 
-DECODE3 =>
-    C2 & C3
+COL3 =>
+    K2 & K3
 
+K0.d  =>
+    K0 & X1
+  # !K0 & !X1
+
+K0.ar  =>
+    0 
+
+K0.ck  =>
+    MCK
+
+K0.sp K1.sp K2.sp K3.sp X0.sp X1.sp  =>
+    0 
+
+K1.d  =>
+    !K0 & K1
+  # K1 & X1
+  # K0 & !K1 & !X1
+
+K1.ar  =>
+    0 
+
+K1.ck  =>
+    MCK
+
+K1.sp  =>
+    
+K2.d  =>
+    K2 & X1
+  # K2 & X0
+  # !K2 & !X0 & !X1
+
+K2.ar  =>
+    0 
+
+K2.ck  =>
+    MCK
+
+K2.sp  =>
+    
+K3.d  =>
+    !K2 & K3
+  # K3 & X1
+  # K3 & X0
+  # K2 & !K3 & !X0 & !X1
+
+K3.ar  =>
+    0 
+
+K3.ck  =>
+    MCK
+
+K3.sp  =>
+    
 K_VAL =>
     !X0 & X1
 
-MUX_OUT =>
-    !C0 & !C1 & MUX_IN0
-  # C0 & !C1 & MUX_IN1
-  # !C0 & C1 & MUX_IN2
-  # C0 & C1 & MUX_IN3
-
 X0.d  =>
-    !MUX_IN0 & !X0 & !X1
-  # !MUX_IN1 & !X0 & !X1
-  # !MUX_IN3 & !X0 & !X1
-  # !MUX_IN2 & !X0 & !X1
+    !LINE0 & !X0 & !X1
+  # !LINE1 & !X0 & !X1
+  # !LINE3 & !X0 & !X1
+  # !LINE2 & !X0 & !X1
   # K_ACK & X0 & X1
-  # MUX_OUT & X0 & !X1
+  # X0 & !X1 & Y
   # K_ACK & !X0 & X1
-  # !MUX_OUT & X0 & X1
+  # X0 & X1 & !Y
 
 X0.ar  =>
     0 
 
 X0.ck  =>
-    MCK
+    !MCK
 
 X0.sp  =>
     
 X1.d  =>
     K_ACK & X0 & X1
-  # !MUX_OUT & X0 & !X1
+  # !LINE0 & X0 & !X1 & !Y
+  # !LINE1 & X0 & !X1 & !Y
+  # !LINE2 & X0 & !X1 & !Y
+  # !LINE3 & X0 & !X1 & !Y
   # !X0 & X1
-  # !MUX_OUT & X0 & X1
+  # X0 & X1 & !Y
 
 X1.ar  =>
     0 
 
 X1.ck  =>
-    MCK
+    !MCK
 
 X1.sp  =>
     
-C0.oe  =>
+Y =>
+    !K0 & !K1 & LINE0
+  # K0 & !K1 & LINE1
+  # !K0 & K1 & LINE2
+  # K0 & K1 & LINE3
+
+COL0.oe  =>
     1 
 
-C1.oe  =>
+COL1.oe  =>
     1 
 
-C2.oe  =>
+COL2.oe  =>
     1 
 
-C3.oe  =>
+COL3.oe  =>
     1 
 
-DECODE0.oe  =>
+K0.oe  =>
     1 
 
-DECODE1.oe  =>
+K1.oe  =>
     1 
 
-DECODE2.oe  =>
+K2.oe  =>
     1 
 
-DECODE3.oe  =>
+K3.oe  =>
     1 
 
 K_VAL.oe  =>
     1 
 
-MUX_OUT.oe  =>
+Y.oe  =>
     1 
 
 %END

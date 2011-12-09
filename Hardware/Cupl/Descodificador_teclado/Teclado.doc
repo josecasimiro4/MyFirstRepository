@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Mon Oct 31 15:27:34 2011
+Created         Fri Dec 09 18:27:17 2011
 Name            Teclado
 Partno          00
 Revision        01
@@ -20,63 +20,7 @@ Location        Lisboa
 ===============================================================================
 
 AND_LINE =>
-    MUX_IN0 & MUX_IN1 & MUX_IN2 & MUX_IN3
-
-C0.d  =>
-    C0 & X1
-  # !C0 & !X1
-
-C0.ar  =>
-    0 
-
-C0.ck  =>
-    MCK
-
-C0.sp  =>
-    0 
-
-C1.d  =>
-    !C0 & C1
-  # C1 & X1
-  # C0 & !C1 & !X1
-
-C1.ar  =>
-    0 
-
-C1.ck  =>
-    MCK
-
-C1.sp  =>
-    0 
-
-C2.d  =>
-    C2 & X1
-  # C2 & X0
-  # !C2 & !X0 & !X1
-
-C2.ar  =>
-    0 
-
-C2.ck  =>
-    !MCK
-
-C2.sp  =>
-    0 
-
-C3.d  =>
-    !C2 & C3
-  # C3 & X1
-  # C3 & X0
-  # C2 & !C3 & !X0 & !X1
-
-C3.ar  =>
-    0 
-
-C3.ck  =>
-    !MCK
-
-C3.sp  =>
-    0 
+    LINE0 & LINE1 & LINE2 & LINE3
 
 CE0 =>
     !X1
@@ -84,89 +28,148 @@ CE0 =>
 CE1 =>
     !X0 & !X1
 
-DECODE0 =>
-    !C2 & !C3
+COL0 =>
+    !K2 & !K3
 
-DECODE1 =>
-    C2 & !C3
+COL1 =>
+    K2 & !K3
 
-DECODE2 =>
-    !C2 & C3
+COL2 =>
+    !K2 & K3
 
-DECODE3 =>
-    C2 & C3
+COL3 =>
+    K2 & K3
+
+K0.d  =>
+    K0 & X1
+  # !K0 & !X1
+
+K0.ar  =>
+    0 
+
+K0.ck  =>
+    MCK
+
+K0.sp  =>
+    0 
+
+K1.d  =>
+    !K0 & K1
+  # K1 & X1
+  # K0 & !K1 & !X1
+
+K1.ar  =>
+    0 
+
+K1.ck  =>
+    MCK
+
+K1.sp  =>
+    0 
+
+K2.d  =>
+    K2 & X1
+  # K2 & X0
+  # !K2 & !X0 & !X1
+
+K2.ar  =>
+    0 
+
+K2.ck  =>
+    MCK
+
+K2.sp  =>
+    0 
+
+K3.d  =>
+    !K2 & K3
+  # K3 & X1
+  # K3 & X0
+  # K2 & !K3 & !X0 & !X1
+
+K3.ar  =>
+    0 
+
+K3.ck  =>
+    MCK
+
+K3.sp  =>
+    0 
 
 K_VAL =>
     !X0 & X1
 
-MUX_OUT =>
-    !C0 & !C1 & MUX_IN0
-  # C0 & !C1 & MUX_IN1
-  # !C0 & C1 & MUX_IN2
-  # C0 & C1 & MUX_IN3
-
 X0.d  =>
-    !MUX_IN0 & !X0 & !X1
-  # !MUX_IN1 & !X0 & !X1
-  # !MUX_IN3 & !X0 & !X1
-  # !MUX_IN2 & !X0 & !X1
+    !LINE0 & !X0 & !X1
+  # !LINE1 & !X0 & !X1
+  # !LINE3 & !X0 & !X1
+  # !LINE2 & !X0 & !X1
   # K_ACK & X0 & X1
-  # MUX_OUT & X0 & !X1
+  # X0 & !X1 & Y
   # K_ACK & !X0 & X1
-  # !MUX_OUT & X0 & X1
+  # X0 & X1 & !Y
 
 X0.ar  =>
     0 
 
 X0.ck  =>
-    MCK
+    !MCK
 
 X0.sp  =>
     0 
 
 X1.d  =>
     K_ACK & X0 & X1
-  # !MUX_OUT & X0 & !X1
+  # !LINE0 & X0 & !X1 & !Y
+  # !LINE1 & X0 & !X1 & !Y
+  # !LINE2 & X0 & !X1 & !Y
+  # !LINE3 & X0 & !X1 & !Y
   # !X0 & X1
-  # !MUX_OUT & X0 & X1
+  # X0 & X1 & !Y
 
 X1.ar  =>
     0 
 
 X1.ck  =>
-    MCK
+    !MCK
 
 X1.sp  =>
     0 
 
-C0.oe  =>
+Y =>
+    !K0 & !K1 & LINE0
+  # K0 & !K1 & LINE1
+  # !K0 & K1 & LINE2
+  # K0 & K1 & LINE3
+
+COL0.oe  =>
     1 
 
-C1.oe  =>
+COL1.oe  =>
     1 
 
-C2.oe  =>
+COL2.oe  =>
     1 
 
-C3.oe  =>
+COL3.oe  =>
     1 
 
-DECODE0.oe  =>
+K0.oe  =>
     1 
 
-DECODE1.oe  =>
+K1.oe  =>
     1 
 
-DECODE2.oe  =>
+K2.oe  =>
     1 
 
-DECODE3.oe  =>
+K3.oe  =>
     1 
 
 K_VAL.oe  =>
     1 
 
-MUX_OUT.oe  =>
+Y.oe  =>
     1 
 
 
@@ -179,60 +182,60 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
 --- --------            ---     ---     ----    ------  ------  -----   
 
     AND_LINE                    0        I        1       -       -     
-    C0                          23       V        -       -       -     
-    C0                  d       23       X        2       8       1     
-    C0                  ar      23       X        1       1       1     
-    C0                  ck      23       X        1       1       1     
-    C0                  sp      23       X        1       1       1     
-    C1                          22       V        -       -       -     
-    C1                  d       22       X        3       10      1     
-    C1                  ar      22       X        1       1       1     
-    C1                  ck      22       X        1       1       1     
-    C1                  sp      22       X        1       1       1     
-    C2                          21       V        -       -       -     
-    C2                  d       21       X        3       12      1     
-    C2                  ar      21       X        1       1       1     
-    C2                  ck      21       X        1       1       1     
-    C2                  sp      21       X        1       1       1     
-    C3                          20       V        -       -       -     
-    C3                  d       20       X        4       14      1     
-    C3                  ar      20       X        1       1       1     
-    C3                  ck      20       X        1       1       1     
-    C3                  sp      20       X        1       1       1     
     CE0                         0        I        1       -       -     
     CE1                         0        I        1       -       -     
- !  DECODE0                     17       V        1       14      1     
- !  DECODE1                     16       V        1       12      1     
- !  DECODE2                     15       V        1       10      1     
- !  DECODE3                     14       V        1       8       1     
+ !  COL0                        17       V        1       14      1     
+ !  COL1                        16       V        1       12      1     
+ !  COL2                        15       V        1       10      1     
+ !  COL3                        14       V        1       8       1     
+    K0                          23       V        -       -       -     
+    K0                  d       23       X        2       8       1     
+    K0                  ar      23       X        1       1       1     
+    K0                  ck      23       X        1       1       1     
+    K0                  sp      23       X        1       1       1     
+    K1                          22       V        -       -       -     
+    K1                  d       22       X        3       10      1     
+    K1                  ar      22       X        1       1       1     
+    K1                  ck      22       X        1       1       1     
+    K1                  sp      22       X        1       1       1     
+    K2                          21       V        -       -       -     
+    K2                  d       21       X        3       12      1     
+    K2                  ar      21       X        1       1       1     
+    K2                  ck      21       X        1       1       1     
+    K2                  sp      21       X        1       1       1     
+    K3                          20       V        -       -       -     
+    K3                  d       20       X        4       14      1     
+    K3                  ar      20       X        1       1       1     
+    K3                  ck      20       X        1       1       1     
+    K3                  sp      20       X        1       1       1     
     K_ACK                       10       V        -       -       -     
     K_VAL                       19       V        1       16      1     
+    LINE0                       6        V        -       -       -     
+    LINE1                       7        V        -       -       -     
+    LINE2                       8        V        -       -       -     
+    LINE3                       9        V        -       -       -     
     MCK                         1        V        -       -       -     
-    MUX_IN0                     6        V        -       -       -     
-    MUX_IN1                     7        V        -       -       -     
-    MUX_IN2                     8        V        -       -       -     
-    MUX_IN3                     9        V        -       -       -     
-    MUX_OUT                     18       V        4       16      1     
     X0                          30       N        -       -       -     
     X0                  d       30       M        8       8       1     
     X0                  ar      30       M        1       1       1     
     X0                  ck      30       M        1       1       1     
     X0                  sp      30       M        1       1       1     
     X1                          29       N        -       -       -     
-    X1                  d       29       M        4       8       1     
+    X1                  d       29       M        7       8       1     
     X1                  ar      29       M        1       1       1     
     X1                  ck      29       M        1       1       1     
     X1                  sp      29       M        1       1       1     
-    C0                  oe      23       D        1       1       0     
-    C1                  oe      22       D        1       1       0     
-    C2                  oe      21       D        1       1       0     
-    C3                  oe      20       D        1       1       0     
-    DECODE0             oe      17       D        1       1       0     
-    DECODE1             oe      16       D        1       1       0     
-    DECODE2             oe      15       D        1       1       0     
-    DECODE3             oe      14       D        1       1       0     
+    Y                           18       V        4       16      1     
+    COL0                oe      17       D        1       1       0     
+    COL1                oe      16       D        1       1       0     
+    COL2                oe      15       D        1       1       0     
+    COL3                oe      14       D        1       1       0     
+    K0                  oe      23       D        1       1       0     
+    K1                  oe      22       D        1       1       0     
+    K2                  oe      21       D        1       1       0     
+    K3                  oe      20       D        1       1       0     
     K_VAL               oe      19       D        1       1       0     
-    MUX_OUT             oe      18       D        1       1       0     
+    Y                   oe      18       D        1       1       0     
 
 
 LEGEND    D : default variable         F : field      G : group
@@ -292,7 +295,7 @@ Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx
  03192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03276 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03360 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 03444 ----------------------------------------------------------------------------------x- 
+ 03444 -----------------------------------------------------------------------------------x 
  03528 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03612 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03696 ------------------------------------------------------------------------------------ 
@@ -312,7 +315,7 @@ Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx
  04788 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04872 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04956 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 05040 ----------------------------------------------------------------------------------x- 
+ 05040 -----------------------------------------------------------------------------------x 
  05124 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05208 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05292 ------------------------------------------------------------------------------------ 
@@ -335,7 +338,7 @@ Pin #19 Node 30 ,40  14376 Mode  ---  14411 xxxx
  06636 ------------------------------------x---x---x--------------------------------------- 
  06720 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06804 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 06888 -----------------------------------------------------------------------------------x 
+ 06888 ----------------------------------------------------------------------------------x- 
  06972 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07056 ------------------------------------------------------------------------------------ 
 Pin #18 Node 29 ,39  14379 Mode  ---  14415 xxxx 
@@ -348,16 +351,16 @@ Pin #18 Node 29 ,39  14379 Mode  ---  14415 xxxx
  07644 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07812 -----------x------------------------x-------x--------------------------------------- 
- 07896 -------------------------------------x--x---x--------------------------------------- 
- 07980 ------------------------------------x--------x-------------------------------------- 
- 08064 ------------------------------------x---x---x--------------------------------------- 
- 08148 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08232 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08316 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 07896 -------------------------------------x--x-x-x--------------------------------------- 
+ 07980 ----------------------------------x--x--x---x--------------------------------------- 
+ 08064 --------------------------x----------x--x---x--------------------------------------- 
+ 08148 ------------------x------------------x--x---x--------------------------------------- 
+ 08232 ------------------------------------x--------x-------------------------------------- 
+ 08316 ------------------------------------x---x---x--------------------------------------- 
  08400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08484 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08568 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08652 -----------------------------------------------------------------------------------x 
+ 08652 ----------------------------------------------------------------------------------x- 
  08736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08820 ------------------------------------------------------------------------------------ 
 Pin #17 Node 28 ,38  14382 Mode  -xx  14419 xxxx 
@@ -440,16 +443,16 @@ LEGEND    X : fuse not blown
                                ______________
                               |   Teclado    |
                       MCK x---|1           24|---x Vcc                      
-                          x---|2           23|---x C0                       
-                          x---|3           22|---x C1                       
-                          x---|4           21|---x C2                       
-                          x---|5           20|---x C3                       
-                  MUX_IN0 x---|6           19|---x K_VAL                    
-                  MUX_IN1 x---|7           18|---x MUX_OUT                  
-                  MUX_IN2 x---|8           17|---x !DECODE0                 
-                  MUX_IN3 x---|9           16|---x !DECODE1                 
-                    K_ACK x---|10          15|---x !DECODE2                 
-                          x---|11          14|---x !DECODE3                 
+                          x---|2           23|---x K0                       
+                          x---|3           22|---x K1                       
+                          x---|4           21|---x K2                       
+                          x---|5           20|---x K3                       
+                    LINE0 x---|6           19|---x K_VAL                    
+                    LINE1 x---|7           18|---x Y                        
+                    LINE2 x---|8           17|---x !COL0                    
+                    LINE3 x---|9           16|---x !COL1                    
+                    K_ACK x---|10          15|---x !COL2                    
+                          x---|11          14|---x !COL3                    
                       GND x---|12          13|---x                          
                               |______________|
 
