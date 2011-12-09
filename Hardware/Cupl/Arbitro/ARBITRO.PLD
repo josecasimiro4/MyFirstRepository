@@ -1,0 +1,52 @@
+Name     Arbitro ;
+PartNo   00 ;
+Date     28-11-2011 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location  ;
+Device   v750c ;
+
+/* *************** INPUT PINS *********************/
+PIN    1 =  MCK                      ; /*                                 */ 
+PIN    3 =  KVAL                       ; /*                                 */ 
+PIN    4 =  TXREADY                     ; /*                                 */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN    14 = KACK                        ; /*                                 */ 
+PIN    15 = LOAD                        ; /*                                 */ 
+PIN    16 =   A0                      ; /*                                 */ 
+PIN 	17 =	A1;
+
+
+/*****/
+
+[A0..A1].sp = 'b' 0;
+[A0..A1].ck = MCK;
+[A0..A1].ar = 'b' 0;
+
+SEQUENCE [A1,A0]{
+	
+	PRESENT 0:
+		IF KVAL NEXT 1;
+		DEFAULT NEXT 0;	
+
+	PRESENT 1:
+
+		IF TXREADY NEXT 2;
+		DEFAULT NEXT 1;
+	
+	PRESENT 2:
+
+		OUT LOAD;
+		IF !TXREADY NEXT 3;
+		DEFAULT NEXT 2;
+	PRESENT 3:
+
+		OUT KACK;
+		IF !KVAL NEXT 0;
+		DEFAULT NEXT 3;
+}
+
+

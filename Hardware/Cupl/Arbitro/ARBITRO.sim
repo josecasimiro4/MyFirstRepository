@@ -1,0 +1,61 @@
+%SIGNAL
+PIN  16 =  A0 
+PIN  17 =  A1 
+PIN  14 =  KACK 
+PIN   3 =  KVAL 
+PIN  15 =  LOAD 
+PIN   1 =  MCK 
+PIN   4 =  TXREADY 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+A0.d  =>
+    !A0 & !A1 & KVAL
+  # A0 & A1 & KVAL
+  # A0 & !A1 & !TXREADY
+  # !A0 & A1 & !TXREADY
+
+A0.ar  =>
+    0 
+
+A0.ck  =>
+    MCK
+
+A0.sp A1.sp  =>
+    0 
+
+A1.d  =>
+    A0 & A1 & KVAL
+  # A0 & !A1 & TXREADY
+  # !A0 & A1
+
+A1.ar  =>
+    0 
+
+A1.ck  =>
+    MCK
+
+A1.sp  =>
+    
+KACK =>
+    A0 & A1
+
+LOAD =>
+    !A0 & A1
+
+A0.oe  =>
+    1 
+
+A1.oe  =>
+    1 
+
+KACK.oe  =>
+    1 
+
+LOAD.oe  =>
+    1 
+
+%END
