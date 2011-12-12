@@ -1,12 +1,12 @@
 
 *******************************************************************************
-                                  Transmissor
+                                   AcessoLCD
 *******************************************************************************
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 25 18:38:39 2011
-Name            Transmissor
+Created         Mon Dec 12 15:32:42 2011
+Name            AcessoLCD
 Partno          00
 Revision        01
 Date            28-9-2011
@@ -463,7 +463,7 @@ LEGEND    X : fuse not blown
 ===============================================================================
 
                                ______________
-                              | Transmissor  |
+                              |  AcessoLCD   |
                      MCLK x---|1           24|---x Vcc                      
                     !MIck x---|2           23|---x CLEAR                    
                      MIxD x---|3           22|---x DISP                     

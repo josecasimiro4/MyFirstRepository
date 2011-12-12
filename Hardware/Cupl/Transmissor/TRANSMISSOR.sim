@@ -1,0 +1,159 @@
+%SIGNAL
+PIN  16 =  C0 
+PIN  17 =  C1 
+PIN  18 =  C2 
+PIN   3 =  K0 
+PIN   4 =  K1 
+PIN   5 =  K2 
+PIN   6 =  K3 
+PIN   7 =  KCK 
+PIN  22 =  KXD 
+PIN   2 =  LOAD 
+PIN   1 =  MCK 
+PIN  25 =  REG_K0 
+PIN  26 =  REG_K1 
+PIN  27 =  REG_K2 
+PIN  28 =  REG_K3 
+PIN  21 =  T0 
+PIN  20 =  T1 
+PIN  23 =  TXREADY 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+C0.d  =>
+    !C0
+
+C0.ar  =>
+    !T0 & !T1
+
+C0.ck  =>
+    !KCK
+
+C0.sp C1.sp C2.sp REG_K0.sp REG_K1.sp REG_K2.sp REG_K3.sp T0.sp T1.sp  =>
+    0 
+
+C1.d  =>
+    !C0 & C1
+  # C0 & !C1
+
+C1.ar  =>
+    !T0 & !T1
+
+C1.ck  =>
+    !KCK
+
+C1.sp  =>
+    
+C2.d  =>
+    !C1 & C2
+  # !C0 & C2
+  # C0 & C1 & !C2
+
+C2.ar  =>
+    !T0 & !T1
+
+C2.ck  =>
+    !KCK
+
+C2.sp  =>
+    
+COUNTEREND =>
+    !C0 & C1 & C2
+
+IDLE =>
+    !T0 & !T1
+
+KXD =>
+    !C0 & !C1 & !C2
+  # !C0 & C1 & !C2 & REG_K0
+  # C0 & C1 & !C2 & REG_K1
+  # !C0 & !C1 & C2 & REG_K2
+  # C0 & !C1 & C2 & REG_K3
+  # !C0 & C1 & C2
+
+REG_K0.ar  =>
+    0 
+
+REG_K0.ck  =>
+    LOAD
+
+REG_K0.sp  =>
+    
+REG_K1.ar  =>
+    0 
+
+REG_K1.ck  =>
+    LOAD
+
+REG_K1.sp  =>
+    
+REG_K2.ar  =>
+    0 
+
+REG_K2.ck  =>
+    LOAD
+
+REG_K2.sp  =>
+    
+REG_K3.ar  =>
+    0 
+
+REG_K3.ck  =>
+    LOAD
+
+REG_K3.sp  =>
+    
+T0.d  =>
+    LOAD & !T1
+
+T0.ar  =>
+    0 
+
+T0.ck  =>
+    MCK
+
+T0.sp  =>
+    
+T1.d  =>
+    C0 & KCK & !T0 & T1
+  # !LOAD & T0 & !T1
+  # !KCK & !T0 & T1
+  # !C2 & KCK & !T0 & T1
+  # !C1 & KCK & !T0 & T1
+
+T1.ar  =>
+    0 
+
+T1.ck  =>
+    MCK
+
+T1.sp  =>
+    
+TXREADY =>
+    !T0 & !T1
+
+C0.oe  =>
+    1 
+
+C1.oe  =>
+    1 
+
+C2.oe  =>
+    1 
+
+KXD.oe  =>
+    1 
+
+T0.oe  =>
+    1 
+
+T1.oe  =>
+    1 
+
+TXREADY.oe  =>
+    1 
+
+%END

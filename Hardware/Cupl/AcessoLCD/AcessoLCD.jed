@@ -1,8 +1,8 @@
 
 CUPL(WM)        5.0a  Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Nov 25 18:38:39 2011
-Name            Transmissor
+Created         Mon Dec 12 15:32:42 2011
+Name            AcessoLCD
 Partno          00
 Revision        01
 Date            28-9-2011
@@ -169,4 +169,4 @@ Location        Lisboa
 *L14368 01101101111011011011001001000000
 *L14432 00000110000001100000000000000000
 *C1A5A
-*02D4
+*012F
