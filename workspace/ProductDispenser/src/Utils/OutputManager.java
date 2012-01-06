@@ -5,6 +5,10 @@ public class OutputManager {
 
 	private static int _image=0x0;
 	
+	public static void init(){
+		NotUsbPort.out(0);
+	}
+	
 	public static void setBits(int mask, int val, int pos){
 		
 		int oldImg = _image;

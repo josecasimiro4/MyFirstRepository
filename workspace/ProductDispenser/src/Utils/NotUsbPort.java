@@ -5,6 +5,7 @@ public class NotUsbPort {
 
 	public static int in()
 	{
+		UsbPort.in();
 		return ~UsbPort.in();
 	}
 	
