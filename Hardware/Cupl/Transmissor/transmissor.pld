@@ -48,6 +48,8 @@ PINNODE 28 = REG_K3;
 [REG_K0..REG_K3].ck = LOAD;
 [REG_K0..REG_K3].ar = 'b' 0;
 [REG_K0..REG_K3].sp = 'b' 0;
+[REG_K0..REG_K3].d = [K0..K3];
+
  
 C0.d = !C0;
 C1.d = C1$C0;
@@ -66,6 +68,7 @@ SEQUENCE[T0,T1] {
 		DEFAULT NEXT 0;
 	
 	PRESENT 1:
+		OUT IDLE;
 		IF !LOAD NEXT 2;
 		DEFAULT NEXT 1;
 

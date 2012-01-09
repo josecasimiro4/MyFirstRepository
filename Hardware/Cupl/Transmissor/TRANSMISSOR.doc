@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Mon Dec 12 15:31:06 2011
+Created         Fri Dec 16 16:57:30 2011
 Name            transmissor
 Partno          00 
 Revision        01 
@@ -23,7 +23,7 @@ C0.d  =>
     !C0
 
 C0.ar  =>
-    !T0 & !T1
+    !T1
 
 C0.ck  =>
     !KCK
@@ -36,7 +36,7 @@ C1.d  =>
   # C0 & !C1
 
 C1.ar  =>
-    !T0 & !T1
+    !T1
 
 C1.ck  =>
     !KCK
@@ -50,7 +50,7 @@ C2.d  =>
   # C0 & C1 & !C2
 
 C2.ar  =>
-    !T0 & !T1
+    !T1
 
 C2.ck  =>
     !KCK
@@ -62,7 +62,7 @@ COUNTEREND =>
     !C0 & C1 & C2
 
 IDLE =>
-    !T0 & !T1
+    !T1
 
 KXD =>
     !C0 & !C1 & !C2
@@ -71,6 +71,9 @@ KXD =>
   # !C0 & !C1 & C2 & REG_K2
   # C0 & !C1 & C2 & REG_K3
   # !C0 & C1 & C2
+
+REG_K0.d  =>
+    K0
 
 REG_K0.ar  =>
     0 
@@ -81,6 +84,9 @@ REG_K0.ck  =>
 REG_K0.sp  =>
     0 
 
+REG_K1.d  =>
+    K1
+
 REG_K1.ar  =>
     0 
 
@@ -90,6 +96,9 @@ REG_K1.ck  =>
 REG_K1.sp  =>
     0 
 
+REG_K2.d  =>
+    K2
+
 REG_K2.ar  =>
     0 
 
@@ -98,6 +107,9 @@ REG_K2.ck  =>
 
 REG_K2.sp  =>
     0 
+
+REG_K3.d  =>
+    K3
 
 REG_K3.ar  =>
     0 
@@ -195,18 +207,22 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     LOAD                        2        V        -       -       -     
     MCK                         1        V        -       -       -     
     REG_K0                      25       N        -       -       -     
+    REG_K0              d       25       M        1       4       1     
     REG_K0              ar      25       M        1       1       1     
     REG_K0              ck      25       M        1       1       1     
     REG_K0              sp      25       M        1       1       1     
     REG_K1                      26       N        -       -       -     
+    REG_K1              d       26       M        1       5       1     
     REG_K1              ar      26       M        1       1       1     
     REG_K1              ck      26       M        1       1       1     
     REG_K1              sp      26       M        1       1       1     
     REG_K2                      27       N        -       -       -     
+    REG_K2              d       27       M        1       6       1     
     REG_K2              ar      27       M        1       1       1     
     REG_K2              ck      27       M        1       1       1     
     REG_K2              sp      27       M        1       1       1     
     REG_K3                      28       N        -       -       -     
+    REG_K3              d       28       M        1       7       1     
     REG_K3              ar      28       M        1       1       1     
     REG_K3              ck      28       M        1       1       1     
     REG_K3              sp      28       M        1       1       1     
@@ -350,12 +366,12 @@ Pin #18 Node 29 ,39  14379 Mode  xx-  14415 xxxx
  08232 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08316 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08484 -------------------------------------------------------x-------x-------------------- 
+ 08484 -------------------------------------------------------x---------------------------- 
  08568 ----------------------------------x------------------------------------------------- 
  08652 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08820 ------------------------------------------------------------------------------------ 
-Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xxxx 
+Pin #17 Node 28 ,38  14382 Mode  x--  14419 xxxx 
  08904 -----------------------x------x----------------------------------------------------- 
  08988 ----------------------x--------x---------------------------------------------------- 
  09072 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -363,43 +379,43 @@ Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xxxx
  09240 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09324 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 09492 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 09492 -------------------------------------------x---------------------------------------- 
  09576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09660 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09744 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09828 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09912 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09996 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 10080 -------------------------------------------------------x-------x-------------------- 
+ 10080 -------------------------------------------------------x---------------------------- 
  10164 ----------------------------------x------------------------------------------------- 
  10248 ---------------------------------------------------------------------------x-------- 
  10332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10416 ------------------------------------------------------------------------------------ 
-Pin #16 Node 27 ,37  14385 Mode  xx-  14423 xxxx 
+Pin #16 Node 27 ,37  14385 Mode  x--  14423 xxxx 
  10500 -----------------------x------------------------------------------------------------ 
  10584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10668 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10752 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10836 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 11004 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 11004 ---------------------------------------------------x-------------------------------- 
  11088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11172 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11256 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11340 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11424 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 11508 -------------------------------------------------------x-------x-------------------- 
+ 11508 -------------------------------------------------------x---------------------------- 
  11592 ----------------------------------x------------------------------------------------- 
  11676 ---------------------------------------------------------------------------x-------- 
  11760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11844 ------------------------------------------------------------------------------------ 
-Pin #15 Node 26 ,36  14388 Mode  xxx  14427 xxxx 
+Pin #15 Node 26 ,36  14388 Mode  x-x  14427 xxxx 
  11928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12012 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12180 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12264 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 12348 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 12348 -----------------------------------------------------------x------------------------ 
  12432 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12516 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -409,12 +425,12 @@ Pin #15 Node 26 ,36  14388 Mode  xxx  14427 xxxx
  12936 ---------------------------------------------------------------------------x-------- 
  13020 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13104 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #14 Node 25 ,35  14391 Mode  xxx  14431 xxxx 
+Pin #14 Node 25 ,35  14391 Mode  x-x  14431 xxxx 
  13188 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13272 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13356 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 13524 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 13524 -------------------------------------------------------------------x---------------- 
  13608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13692 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13776 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 

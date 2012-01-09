@@ -53,11 +53,11 @@ COL3 = K3 & K2;
 [X1..0].ck = !MCK;
 
 
-K0.d = K0 $ CE0;
-K1.d = K1 $(K0& CE0); 
+K2.d = K2 $ CE0;
+K3.d = K3 $(K3& CE0); 
 
-K2.d = K2 $ CE1;
-K3.d = K3 $(K2& CE1); 
+K0.d = K0 $  CE1;
+K1.d = K1 $(K1& CE1); 
 
 AND_LINE = LINE0 & LINE1 & LINE2 & LINE3;
 
