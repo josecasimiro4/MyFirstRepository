@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Fri Dec 09 18:27:17 2011
+Created         Thu Feb 16 16:08:09 2012
 Name            Teclado
 Partno          00
 Revision        01
@@ -42,7 +42,8 @@ COL3 =>
 
 K0.d  =>
     K0 & X1
-  # !K0 & !X1
+  # K0 & X0
+  # !K0 & !X0 & !X1
 
 K0.ar  =>
     0 
@@ -50,13 +51,15 @@ K0.ar  =>
 K0.ck  =>
     MCK
 
+K0.oe  =>
+    K_OE
+
 K0.sp  =>
     0 
 
 K1.d  =>
-    !K0 & K1
-  # K1 & X1
-  # K0 & !K1 & !X1
+    K1 & X1
+  # K1 & X0
 
 K1.ar  =>
     0 
@@ -64,13 +67,15 @@ K1.ar  =>
 K1.ck  =>
     MCK
 
+K1.oe  =>
+    K_OE
+
 K1.sp  =>
     0 
 
 K2.d  =>
     K2 & X1
-  # K2 & X0
-  # !K2 & !X0 & !X1
+  # !K2 & !X1
 
 K2.ar  =>
     0 
@@ -78,20 +83,23 @@ K2.ar  =>
 K2.ck  =>
     MCK
 
+K2.oe  =>
+    K_OE
+
 K2.sp  =>
     0 
 
 K3.d  =>
-    !K2 & K3
-  # K3 & X1
-  # K3 & X0
-  # K2 & !K3 & !X0 & !X1
+    K3 & X1
 
 K3.ar  =>
     0 
 
 K3.ck  =>
     MCK
+
+K3.oe  =>
+    K_OE
 
 K3.sp  =>
     0 
@@ -154,18 +162,6 @@ COL2.oe  =>
 COL3.oe  =>
     1 
 
-K0.oe  =>
-    1 
-
-K1.oe  =>
-    1 
-
-K2.oe  =>
-    1 
-
-K3.oe  =>
-    1 
-
 K_VAL.oe  =>
     1 
 
@@ -189,26 +185,31 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
  !  COL2                        15       V        1       10      1     
  !  COL3                        14       V        1       8       1     
     K0                          23       V        -       -       -     
-    K0                  d       23       X        2       8       1     
+    K0                  d       23       X        3       8       1     
     K0                  ar      23       X        1       1       1     
     K0                  ck      23       X        1       1       1     
+    K0                  oe      23       X        1       1       1     
     K0                  sp      23       X        1       1       1     
     K1                          22       V        -       -       -     
-    K1                  d       22       X        3       10      1     
+    K1                  d       22       X        2       10      1     
     K1                  ar      22       X        1       1       1     
     K1                  ck      22       X        1       1       1     
+    K1                  oe      22       X        1       1       1     
     K1                  sp      22       X        1       1       1     
     K2                          21       V        -       -       -     
-    K2                  d       21       X        3       12      1     
+    K2                  d       21       X        2       12      1     
     K2                  ar      21       X        1       1       1     
     K2                  ck      21       X        1       1       1     
+    K2                  oe      21       X        1       1       1     
     K2                  sp      21       X        1       1       1     
     K3                          20       V        -       -       -     
-    K3                  d       20       X        4       14      1     
+    K3                  d       20       X        1       14      1     
     K3                  ar      20       X        1       1       1     
     K3                  ck      20       X        1       1       1     
+    K3                  oe      20       X        1       1       1     
     K3                  sp      20       X        1       1       1     
     K_ACK                       10       V        -       -       -     
+    K_OE                        13       V        -       -       -     
     K_VAL                       19       V        1       16      1     
     LINE0                       6        V        -       -       -     
     LINE1                       7        V        -       -       -     
@@ -230,10 +231,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     COL1                oe      16       D        1       1       0     
     COL2                oe      15       D        1       1       0     
     COL3                oe      14       D        1       1       0     
-    K0                  oe      23       D        1       1       0     
-    K1                  oe      22       D        1       1       0     
-    K2                  oe      21       D        1       1       0     
-    K3                  oe      20       D        1       1       0     
     K_VAL               oe      19       D        1       1       0     
     Y                   oe      18       D        1       1       0     
 
@@ -253,8 +250,8 @@ SP
 
 Pin #23 Node 34 ,44  14364 Mode  xx-  14395 xxxx 
  00000 ------------------------------------x-----------------------------------------x----- 
- 00084 -------------------------------------x-----------------------------------------x---- 
- 00168 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00084 --------------------------------------------x---------------------------------x----- 
+ 00168 -------------------------------------x-------x---------------------------------x---- 
  00252 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00336 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00420 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -264,11 +261,11 @@ Pin #23 Node 34 ,44  14364 Mode  xx-  14395 xxxx
  00756 -----------------------------------------------------------------------------------x 
  00840 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00924 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 01008 ------------------------------------------------------------------------------------ 
+ 01008 -x---------------------------------------------------------------------------------- 
 Pin #22 Node 33 ,43  14367 Mode  xx-  14399 xxxx 
- 01092 ----------------------------------------------------------------------x--------x---- 
- 01176 ------------------------------------x---------------------------------x------------- 
- 01260 -------------------------------------x---------------------------------x------x----- 
+ 01092 ------------------------------------x---------------------------------x------------- 
+ 01176 --------------------------------------------x-------------------------x------------- 
+ 01260 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01428 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01512 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -280,11 +277,11 @@ Pin #22 Node 33 ,43  14367 Mode  xx-  14399 xxxx
  02016 -----------------------------------------------------------------------------------x 
  02100 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 02268 ------------------------------------------------------------------------------------ 
+ 02268 -x---------------------------------------------------------------------------------- 
 Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx 
  02352 ------------------------------------x-------------------------x--------------------- 
- 02436 --------------------------------------------x-----------------x--------------------- 
- 02520 -------------------------------------x-------x-----------------x-------------------- 
+ 02436 -------------------------------------x-------------------------x-------------------- 
+ 02520 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02604 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02688 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02772 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -298,12 +295,12 @@ Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx
  03444 -----------------------------------------------------------------------------------x 
  03528 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03612 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 03696 ------------------------------------------------------------------------------------ 
+ 03696 -x---------------------------------------------------------------------------------- 
 Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx 
- 03780 ------------------------------------------------------x--------x-------------------- 
- 03864 ------------------------------------x-----------------x----------------------------- 
- 03948 --------------------------------------------x---------x----------------------------- 
- 04032 -------------------------------------x-------x---------x------x--------------------- 
+ 03780 ------------------------------------x-----------------x----------------------------- 
+ 03864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03948 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04032 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04116 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04200 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04284 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -318,7 +315,7 @@ Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx
  05040 -----------------------------------------------------------------------------------x 
  05124 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05208 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 05292 ------------------------------------------------------------------------------------ 
+ 05292 -x---------------------------------------------------------------------------------- 
 Pin #19 Node 30 ,40  14376 Mode  ---  14411 xxxx 
  05376 ------------------------------------x--------x-------------------------------------- 
  05460 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -453,6 +450,6 @@ LEGEND    X : fuse not blown
                     LINE3 x---|9           16|---x !COL1                    
                     K_ACK x---|10          15|---x !COL2                    
                           x---|11          14|---x !COL3                    
-                      GND x---|12          13|---x                          
+                      GND x---|12          13|---x K_OE                     
                               |______________|
 

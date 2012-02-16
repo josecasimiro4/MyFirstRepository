@@ -17,6 +17,7 @@ PIN 7 = LINE1;
 PIN 8 = LINE2;
 PIN 9 = LINE3;
 PIN 10 = K_ACK;
+PIN 13 = K_OE;
 
 
 
@@ -35,6 +36,9 @@ PIN 15 = !COL2;
 PIN 14 = !COL3;
 /* ---------- Program Session ---------*/
 
+
+
+
 Y = (!K1 & !K0 & LINE0) # (!K1 & K0 & LINE1) # (K1 & !K0 & LINE2) # (K1 & K0 & LINE3);
 
 COL0 = !K3 & !K2;
@@ -44,6 +48,8 @@ COL3 = K3 & K2;
 
 [K0..3].ar = 'b' 0;
 [K0..3].sp = 'b' 0;
+
+[K0..3].oe = K_OE;
 
 [K3..0].ck = MCK;
 

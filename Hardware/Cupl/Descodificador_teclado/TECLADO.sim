@@ -8,6 +8,7 @@ PIN  22 =  K1
 PIN  21 =  K2 
 PIN  20 =  K3 
 PIN  10 =  K_ACK 
+PIN  13 =  K_OE 
 PIN  19 =  K_VAL 
 PIN   6 =  LINE0 
 PIN   7 =  LINE1 
@@ -46,7 +47,8 @@ COL3 =>
 
 K0.d  =>
     K0 & X1
-  # !K0 & !X1
+  # K0 & X0
+  # !K0 & !X0 & !X1
 
 K0.ar  =>
     0 
@@ -54,13 +56,15 @@ K0.ar  =>
 K0.ck  =>
     MCK
 
+K0.oe  =>
+    K_OE
+
 K0.sp K1.sp K2.sp K3.sp X0.sp X1.sp  =>
     0 
 
 K1.d  =>
-    !K0 & K1
-  # K1 & X1
-  # K0 & !K1 & !X1
+    K1 & X1
+  # K1 & X0
 
 K1.ar  =>
     0 
@@ -68,12 +72,14 @@ K1.ar  =>
 K1.ck  =>
     MCK
 
+K1.oe  =>
+    K_OE
+
 K1.sp  =>
     
 K2.d  =>
     K2 & X1
-  # K2 & X0
-  # !K2 & !X0 & !X1
+  # !K2 & !X1
 
 K2.ar  =>
     0 
@@ -81,19 +87,22 @@ K2.ar  =>
 K2.ck  =>
     MCK
 
+K2.oe  =>
+    K_OE
+
 K2.sp  =>
     
 K3.d  =>
-    !K2 & K3
-  # K3 & X1
-  # K3 & X0
-  # K2 & !K3 & !X0 & !X1
+    K3 & X1
 
 K3.ar  =>
     0 
 
 K3.ck  =>
     MCK
+
+K3.oe  =>
+    K_OE
 
 K3.sp  =>
     
@@ -151,18 +160,6 @@ COL2.oe  =>
     1 
 
 COL3.oe  =>
-    1 
-
-K0.oe  =>
-    1 
-
-K1.oe  =>
-    1 
-
-K2.oe  =>
-    1 
-
-K3.oe  =>
     1 
 
 K_VAL.oe  =>

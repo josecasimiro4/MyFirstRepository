@@ -1,0 +1,103 @@
+Name     Arbitro ;
+PartNo   00 ;
+Date     28-11-2011 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location  ;
+Device   v750c ;
+
+/* *************** INPUT PINS *********************/
+PIN    1 =  MCK                      ; /*                                 */ 
+PIN    3 =  KVAL                       ; /*                                 */ 
+PIN    4 =  TXREADY                     ; /*                                 */ 
+
+/* *************** OUTPUT PINS *********************/
+
+PIN    14 = KACK                        ; /*                                 */ 
+PIN    15 = LOAD                        ; /*                                 */ 
+PIN    16 =   ARB0                      ; /*                                 */ 
+PIN 	17 =	ARB1;
+PIN    18 = ARB2;
+PIN	19 = nWR;
+PIN 	20 = nRD;
+PIN	21 = A0;
+PIN	22 = A1;
+PIN    23 = K_OE;
+
+PINNODE 25 = PutNotGet;
+PINNODE 29 = P0;
+PINNODE 30 = P1;
+PINNODE 31 = G0;
+PINNODE 32 = G1;
+
+/*****/
+
+[ARB0..ARB2].sp = 'b' 0;
+[ARB0..ARB2].ck = MCK;
+[ARB0..ARB2].ar = 'b' 0;
+
+[P0..P1].sp = 'b' 0;
+[P0..P1].ck = !MCK;
+[P0..P1].ar = 'b' 0;
+
+[G0..G1].sp = 'b' 0;
+[G0..G1].ck = !MCK;
+[G0..G1].ar = 'b' 0;
+
+PutNotGet.sp = 'b' 0;
+PutNotGet.ck = !MCK;
+PutNotGet.ar = 'b'0;
+
+PutNotGet.d = E & NextP # !E & PutNotGet;
+
+P0.d = (NextP & (!P0)) # (!NextP & P0);
+P1.d = (NextP & (P1$P0)) # (!NextP & P1);
+
+G0.d = (NextG & (!G0)) # (!NextG & G0);
+G1.d = (NextG & (G1$G0)) # (!NextG & G1);
+
+EqualIdx = ( !(P0 $ G0) & !(P1 $ G1) );
+
+Empty = !PutNotGet & EqualIdx;
+Full = PutNotGet & EqualIdx;
+
+A0 = (P0&PnG) # (G0&!PnG);
+A1 = (P1&PnG) # (G1&!PnG);
+
+
+SEQUENCE [ARB2,ARB1,ARB0]{
+	
+	PRESENT 0:
+		IF TXREADY & !Empty NEXT 1;
+		IF Empty & KVAL & !Full NEXT 2;
+		IF !TXREADY & KVAL & !Full NEXT 2;	
+
+	PRESENT 1:
+		OUT nRD;
+		NEXT 5;
+	
+	PRESENT 5:
+		OUT LOAD, nRD;
+		IF !TXREADY NEXT 4;
+		IF TXREADY NEXT 5;
+	PRESENT 4:
+		OUT NextG,E;
+		NEXT 0;
+	PRESENT 2:
+		OUT PnG, K_OE;
+		NEXT 3;
+	PRESENT 3:
+		OUT PnG, nWR,K_OE;
+		NEXT 7;
+	PRESENT 7:
+		OUT PnG,K_ACK,K_OE;
+		IF KVAL NEXT 7;
+		IF !KVAL NEXT 6;
+	PRESENT 6:
+		OUT NextP, E;
+		NEXT 0;
+}
+
+

@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Dec 09 18:27:17 2011 "}
+  {DBtime "Thu Feb 16 16:08:09 2012 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,12 +33,13 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P MCK {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P LINE0 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P LINE1 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P LINE2 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P LINE3 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P K_ACK {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P MCK {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P LINE0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P LINE1 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P LINE2 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P LINE3 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P K_ACK {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P K_OE {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P COL3' {Pt "I/O"}{Lq 0}{Ploc 300 20}}
    {P COL2' {Pt "I/O"}{Lq 0}{Ploc 300 40}}
    {P COL1' {Pt "I/O"}{Lq 0}{Ploc 300 60}}
@@ -58,8 +59,9 @@
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 150}
+   {Pnl 120 170}
    [Ts 15][Tj "RC"]
+   {Pnl 120 130}
    {Pnl 120 110}
    {Pnl 120 90}
    {Pnl 120 70}
@@ -77,15 +79,16 @@
    {Pnl 280 190}
    {Pnl 280 210}
 
-   {Sd A 1 6 7 8 9 10 14 15 16 17 18 19 20 21 22 23}
+   {Sd A 1 6 7 8 9 10 13 14 15 16 17 18 19 20 21 22 23}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
    {R 130 220 270 0}
-   {L 130 140 100 140}
-   {L 130 150 140 140 130 130}
+   {L 130 160 100 160}
+   {L 130 170 140 160 130 150}
+   {L 130 120 100 120}
    {L 130 100 100 100}
    {L 130 80 100 80}
    {L 130 60 100 60}
@@ -107,12 +110,13 @@
    {L 270 200 300 200}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "MCK" 140 140}
-   {T "LINE0" 140 100}
-   {T "LINE1" 140 80}
-   {T "LINE2" 140 60}
-   {T "LINE3" 140 40}
-   {T "K_ACK" 140 20}
+   {T "MCK" 140 160}
+   {T "LINE0" 140 120}
+   {T "LINE1" 140 100}
+   {T "LINE2" 140 80}
+   {T "LINE3" 140 60}
+   {T "K_ACK" 140 40}
+   {T "K_OE" 140 20}
    [Tj "RC"]
    {T "COL3'" 260 20}
    {T "COL2'" 260 40}
@@ -158,6 +162,8 @@
    {N LINE3
    }
    {N K_ACK
+   }
+   {N K_OE
    }
    {N COL3'
    }

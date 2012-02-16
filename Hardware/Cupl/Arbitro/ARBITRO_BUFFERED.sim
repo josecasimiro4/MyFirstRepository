@@ -1,0 +1,235 @@
+%SIGNAL
+PIN  21 =  A0 
+PIN  22 =  A1 
+PIN  16 =  ARB0 
+PIN  17 =  ARB1 
+PIN  18 =  ARB2 
+PIN  31 =  G0 
+PIN  32 =  G1 
+PIN  14 =  KACK 
+PIN   3 =  KVAL 
+PIN  23 =  K_OE 
+PIN  15 =  LOAD 
+PIN   1 =  MCK 
+PIN  29 =  P0 
+PIN  30 =  P1 
+PIN  25 =  PutNotGet 
+PIN   4 =  TXREADY 
+PIN  20 =  nRD 
+PIN  19 =  nWR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+A0 =>
+    ARB1 & !ARB2 & P0
+  # ARB0 & ARB1 & ARB2 & P0
+  # !ARB0 & ARB2 & G0
+  # !ARB1 & G0
+
+A1 =>
+    ARB1 & !ARB2 & P1
+  # ARB0 & ARB1 & ARB2 & P1
+  # !ARB0 & ARB2 & G1
+  # !ARB1 & G1
+
+ARB0.d  =>
+    !ARB0 & !ARB1 & !ARB2 & PutNotGet & TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & G1 & !P1 & TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & !G1 & P1 & TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & G0 & !P0 & TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & !G0 & P0 & TXREADY
+  # ARB0 & ARB1 & ARB2 & KVAL
+  # ARB0 & !ARB2
+  # ARB0 & !ARB1 & ARB2 & TXREADY
+  # !ARB0 & ARB1 & !ARB2
+
+ARB0.ar  =>
+    0 
+
+ARB0.ck  =>
+    MCK
+
+ARB0.sp ARB1.sp ARB2.sp G0.sp G1.sp P0.sp P1.sp PutNotGet.sp  =>
+    0 
+
+ARB1.d  =>
+    ARB0 & ARB1 & ARB2
+  # !ARB0 & !ARB1 & !ARB2 & !G0 & !G1 & KVAL & !P0 & !P1 & !PutNotGet
+  # !ARB0 & !ARB1 & !ARB2 & G0 & !G1 & KVAL & P0 & !P1 & !PutNotGet
+  # !ARB0 & !ARB1 & !ARB2 & !G0 & G1 & KVAL & !P0 & P1 & !PutNotGet
+  # !ARB0 & !ARB1 & !ARB2 & G0 & G1 & KVAL & P0 & P1 & !PutNotGet
+  # !ARB0 & !ARB1 & !ARB2 & KVAL & !PutNotGet & !TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & G1 & KVAL & !P1 & !TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & !G1 & KVAL & P1 & !TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & !G0 & KVAL & P0 & !TXREADY
+  # !ARB0 & !ARB1 & !ARB2 & G0 & KVAL & !P0 & !TXREADY
+  # ARB1 & !ARB2
+
+ARB1.ar  =>
+    0 
+
+ARB1.ck  =>
+    MCK
+
+ARB1.sp  =>
+    
+ARB2.d  =>
+    ARB0
+
+ARB2.ar  =>
+    0 
+
+ARB2.ck  =>
+    MCK
+
+ARB2.sp  =>
+    
+E =>
+    !ARB0 & ARB2
+
+Empty =>
+    !G0 & !G1 & !P0 & !P1 & !PutNotGet
+  # G0 & !G1 & P0 & !P1 & !PutNotGet
+  # G0 & G1 & P0 & P1 & !PutNotGet
+  # !G0 & G1 & !P0 & P1 & !PutNotGet
+
+EqualIdx =>
+    !G0 & !G1 & !P0 & !P1
+  # G0 & !G1 & P0 & !P1
+  # !G0 & G1 & !P0 & P1
+  # G0 & G1 & P0 & P1
+
+Full =>
+    !G0 & !G1 & !P0 & !P1 & PutNotGet
+  # G0 & !G1 & P0 & !P1 & PutNotGet
+  # G0 & G1 & P0 & P1 & PutNotGet
+  # !G0 & G1 & !P0 & P1 & PutNotGet
+
+G0.d  =>
+    !ARB0 & !ARB1 & ARB2 & !G0
+  # !ARB2 & G0
+  # ARB1 & G0
+  # ARB0 & G0
+
+G0.ar  =>
+    0 
+
+G0.ck  =>
+    !MCK
+
+G0.sp  =>
+    
+G1.d  =>
+    !ARB0 & !ARB1 & ARB2 & G0 & !G1
+  # !ARB0 & !ARB1 & ARB2 & !G0 & G1
+  # !ARB2 & G1
+  # ARB1 & G1
+  # ARB0 & G1
+
+G1.ar  =>
+    0 
+
+G1.ck  =>
+    !MCK
+
+G1.sp  =>
+    
+K_ACK =>
+    ARB0 & ARB1 & ARB2
+
+K_OE =>
+    ARB1 & !ARB2
+  # ARB0 & ARB1 & ARB2
+
+LOAD =>
+    ARB0 & !ARB1 & ARB2
+
+NextG =>
+    !ARB0 & !ARB1 & ARB2
+
+NextP =>
+    !ARB0 & ARB1 & ARB2
+
+P0.d  =>
+    !ARB0 & ARB1 & ARB2 & !P0
+  # !ARB2 & P0
+  # !ARB1 & P0
+  # ARB0 & P0
+
+P0.ar  =>
+    0 
+
+P0.ck  =>
+    !MCK
+
+P0.sp  =>
+    
+P1.d  =>
+    !ARB0 & ARB1 & ARB2 & P0 & !P1
+  # !ARB0 & ARB1 & ARB2 & !P0 & P1
+  # !ARB2 & P1
+  # !ARB1 & P1
+  # ARB0 & P1
+
+P1.ar  =>
+    0 
+
+P1.ck  =>
+    !MCK
+
+P1.sp  =>
+    
+PnG =>
+    ARB1 & !ARB2
+  # ARB0 & ARB1 & ARB2
+
+PutNotGet.d  =>
+    !ARB0 & ARB1 & ARB2
+  # !ARB2 & PutNotGet
+  # ARB0 & PutNotGet
+
+PutNotGet.ar  =>
+    0 
+
+PutNotGet.ck  =>
+    !MCK
+
+PutNotGet.sp  =>
+    
+nRD =>
+    ARB0 & !ARB1
+
+nWR =>
+    ARB0 & ARB1 & !ARB2
+
+A0.oe  =>
+    1 
+
+A1.oe  =>
+    1 
+
+ARB0.oe  =>
+    1 
+
+ARB1.oe  =>
+    1 
+
+ARB2.oe  =>
+    1 
+
+K_OE.oe  =>
+    1 
+
+LOAD.oe  =>
+    1 
+
+nRD.oe  =>
+    1 
+
+nWR.oe  =>
+    1 
+
+%END
