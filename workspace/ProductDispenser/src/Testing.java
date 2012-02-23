@@ -1,4 +1,4 @@
-import Model.LCD;
+import machine.software.LCD;
 import Utils.Emitter;
 
 

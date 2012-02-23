@@ -75,7 +75,7 @@ public class Stock {
 
 	public static int getNext(int cod, boolean withQuantity) {
 		for(int i=0;i<16;++i){
-			cod = cod == 15 ? 1 : cod+1;
+			cod = cod == 15 ? 0 : cod+1;
 			if(products[cod]!= null){ 
 			     if(withQuantity)
 			    	 if(products[cod].getQuantity()>0)
@@ -86,5 +86,33 @@ public class Stock {
 			}
 		}
 		return cod;
+	}
+	
+	public static int getPrevious(int cod, boolean withQuantity) {
+		for(int i=0;i<16;++i){
+			cod = cod == 0 ? 15 : cod-1;
+			if(products[cod]!= null){ 
+			     if(withQuantity)
+			    	 if(products[cod].getQuantity()>0)
+			    		 return cod;
+			     else
+			    	 return cod;
+				
+			}
+		}
+		return cod;
+	}
+
+	public static void remove(int prodCod) {
+		if(isValidCode(prodCod)){
+			products[prodCod].decrementQuantity();
+		}
+	}
+
+	public static void cancelProduct(int prodCod) {
+		if(isValidCode(prodCod)){
+			products[prodCod].resetQuantity();
+		}
+		
 	}
 }

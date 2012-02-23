@@ -40,6 +40,16 @@ public class Product {
 		_quantity= _quantity+quant>20 ? 20 : _quantity+quant;
 		
 	}
+
+	public void decrementQuantity() {
+		--_quantity;
+		
+	}
+
+	public void resetQuantity() {
+		_quantity=0;
+		
+	}
 	
 
 }
