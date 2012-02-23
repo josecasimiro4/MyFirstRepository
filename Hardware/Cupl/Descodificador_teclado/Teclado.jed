@@ -1,7 +1,7 @@
 
 CUPL(WM)        5.0a  Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Thu Feb 16 16:08:09 2012
+Created         Thu Feb 23 15:45:15 2012
 Name            Teclado
 Partno          00
 Revision        01
@@ -159,4 +159,4 @@ Location        Lisboa
 *L14368 01001001111111100100100100000000
 *L14432 00000110000001100000000000000000
 *CED61
-*B2A1
+*B29C
