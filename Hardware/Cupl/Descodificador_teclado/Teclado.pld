@@ -24,10 +24,10 @@ PIN 13 = K_OE;
 PINNODE 29 = X1;
 PINNODE 30 = X0;
 
-PIN 23 = K0;
-PIN 22 = K1;
-PIN 21 = K2;
-PIN 20 = K3;
+PIN 23 = K2;
+PIN 22 = K3;
+PIN 21 = K0;
+PIN 20 = K1;
 PIN 19 = K_VAL;
 PIN 18 = Y;
 PIN 17 = !COL0;
@@ -60,10 +60,10 @@ COL3 = K3 & K2;
 
 
 K2.d = K2 $ CE0;
-K3.d = K3 $(K3& CE0); 
+K3.d = K3 $(K2& CE0); 
 
 K0.d = K0 $  CE1;
-K1.d = K1 $(K1& CE1); 
+K1.d = K1 $(K0& CE1); 
 
 AND_LINE = LINE0 & LINE1 & LINE2 & LINE3;
 
@@ -73,10 +73,10 @@ SEQUENCE [X1,X0]{
                 IF !AND_LINE NEXT 1;
                 DEFAULT NEXT 0;
         PRESENT 1:
-                OUT CE0;
+                OUT CE1;
                 IF !Y & !AND_LINE next 2;
-		  IF AND_LINE NEXT 0;
-                IF Y NEXT 1;
+                IF  Y NEXT 1;
+		  DEFAULT NEXT 0;
         PRESENT 2:
                 OUT K_VAL;
                 IF K_ACK NEXT 3;

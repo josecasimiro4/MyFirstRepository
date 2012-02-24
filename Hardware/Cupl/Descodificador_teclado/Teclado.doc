@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Thu Feb 23 15:45:15 2012
+Created         Thu Feb 23 19:15:02 2012
 Name            Teclado
 Partno          00
 Revision        01
@@ -23,10 +23,10 @@ AND_LINE =>
     LINE0 & LINE1 & LINE2 & LINE3
 
 CE0 =>
-    !X1
+    !X0 & !X1
 
 CE1 =>
-    !X0 & !X1
+    !X1
 
 COL0 =>
     !K2 & !K3
@@ -42,8 +42,7 @@ COL3 =>
 
 K0.d  =>
     K0 & X1
-  # K0 & X0
-  # !K0 & !X0 & !X1
+  # !K0 & !X1
 
 K0.ar  =>
     0 
@@ -58,8 +57,9 @@ K0.sp  =>
     0 
 
 K1.d  =>
-    K1 & X1
-  # K1 & X0
+    !K0 & K1
+  # K1 & X1
+  # K0 & !K1 & !X1
 
 K1.ar  =>
     0 
@@ -75,7 +75,8 @@ K1.sp  =>
 
 K2.d  =>
     K2 & X1
-  # !K2 & !X1
+  # K2 & X0
+  # !K2 & !X0 & !X1
 
 K2.ar  =>
     0 
@@ -90,7 +91,10 @@ K2.sp  =>
     0 
 
 K3.d  =>
-    K3 & X1
+    !K2 & K3
+  # K3 & X1
+  # K3 & X0
+  # K2 & !K3 & !X0 & !X1
 
 K3.ar  =>
     0 
@@ -185,25 +189,25 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
  !  COL2                        15       V        1       10      1     
  !  COL3                        14       V        1       8       1     
     K0                          23       V        -       -       -     
-    K0                  d       23       X        3       8       1     
+    K0                  d       23       X        2       8       1     
     K0                  ar      23       X        1       1       1     
     K0                  ck      23       X        1       1       1     
     K0                  oe      23       X        1       1       1     
     K0                  sp      23       X        1       1       1     
     K1                          22       V        -       -       -     
-    K1                  d       22       X        2       10      1     
+    K1                  d       22       X        3       10      1     
     K1                  ar      22       X        1       1       1     
     K1                  ck      22       X        1       1       1     
     K1                  oe      22       X        1       1       1     
     K1                  sp      22       X        1       1       1     
     K2                          21       V        -       -       -     
-    K2                  d       21       X        2       12      1     
+    K2                  d       21       X        3       12      1     
     K2                  ar      21       X        1       1       1     
     K2                  ck      21       X        1       1       1     
     K2                  oe      21       X        1       1       1     
     K2                  sp      21       X        1       1       1     
     K3                          20       V        -       -       -     
-    K3                  d       20       X        1       14      1     
+    K3                  d       20       X        4       14      1     
     K3                  ar      20       X        1       1       1     
     K3                  ck      20       X        1       1       1     
     K3                  oe      20       X        1       1       1     
@@ -250,8 +254,8 @@ SP
 
 Pin #23 Node 34 ,44  14364 Mode  xx-  14395 xxxx 
  00000 ------------------------------------x-----------------------------------------x----- 
- 00084 --------------------------------------------x---------------------------------x----- 
- 00168 -------------------------------------x-------x---------------------------------x---- 
+ 00084 -------------------------------------x-----------------------------------------x---- 
+ 00168 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00252 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00336 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  00420 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -263,9 +267,9 @@ Pin #23 Node 34 ,44  14364 Mode  xx-  14395 xxxx
  00924 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01008 -x---------------------------------------------------------------------------------- 
 Pin #22 Node 33 ,43  14367 Mode  xx-  14399 xxxx 
- 01092 ------------------------------------x---------------------------------x------------- 
- 01176 --------------------------------------------x-------------------------x------------- 
- 01260 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01092 ----------------------------------------------------------------------x--------x---- 
+ 01176 ------------------------------------x---------------------------------x------------- 
+ 01260 -------------------------------------x---------------------------------x------x----- 
  01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01428 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01512 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -280,8 +284,8 @@ Pin #22 Node 33 ,43  14367 Mode  xx-  14399 xxxx
  02268 -x---------------------------------------------------------------------------------- 
 Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx 
  02352 ------------------------------------x-------------------------x--------------------- 
- 02436 -------------------------------------x-------------------------x-------------------- 
- 02520 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02436 --------------------------------------------x-----------------x--------------------- 
+ 02520 -------------------------------------x-------x-----------------x-------------------- 
  02604 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02688 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02772 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -297,10 +301,10 @@ Pin #21 Node 32 ,42  14370 Mode  xx-  14403 xxxx
  03612 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03696 -x---------------------------------------------------------------------------------- 
 Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx 
- 03780 ------------------------------------x-----------------x----------------------------- 
- 03864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 03948 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 04032 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03780 ------------------------------------------------------x--------x-------------------- 
+ 03864 ------------------------------------x-----------------x----------------------------- 
+ 03948 --------------------------------------------x---------x----------------------------- 
+ 04032 -------------------------------------x-------x---------x------x--------------------- 
  04116 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04200 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04284 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 

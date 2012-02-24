@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Thu Feb 16 16:07:42 2012
+Created         Thu Feb 23 20:12:19 2012
 Name            Arbitro 
 Partno          00 
 Revision        01 
@@ -137,7 +137,7 @@ G1.ck  =>
 G1.sp  =>
     0 
 
-K_ACK =>
+KACK =>
     ARB0 & ARB1 & ARB2
 
 K_OE =>
@@ -223,6 +223,9 @@ ARB1.oe  =>
 ARB2.oe  =>
     1 
 
+KACK.oe  =>
+    1 
+
 K_OE.oe  =>
     1 
 
@@ -275,9 +278,8 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     G1                  ar      32       M        1       1       1     
     G1                  ck      32       M        1       1       1     
     G1                  sp      32       M        1       1       1     
-    KACK                        14       V        -       -       -     
+    KACK                        14       V        1       8       1     
     KVAL                        3        V        -       -       -     
-    K_ACK                       0        I        1       -       -     
     K_OE                        23       V        2       8       1     
     LOAD                        15       V        1       10      1     
     MCK                         1        V        -       -       -     
@@ -300,13 +302,14 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     PutNotGet           ck      25       M        1       1       1     
     PutNotGet           sp      25       M        1       1       1     
     TXREADY                     4        V        -       -       -     
-    nRD                         20       V        1       14      1     
-    nWR                         19       V        1       16      1     
+ !  nRD                         20       V        1       14      1     
+ !  nWR                         19       V        1       16      1     
     A0                  oe      21       D        1       1       0     
     A1                  oe      22       D        1       1       0     
     ARB0                oe      16       D        1       1       0     
     ARB1                oe      17       D        1       1       0     
     ARB2                oe      18       D        1       1       0     
+    KACK                oe      14       D        1       1       0     
     K_OE                oe      23       D        1       1       0     
     LOAD                oe      15       D        1       1       0     
     nRD                 oe      20       D        1       1       0     
@@ -374,7 +377,7 @@ Pin #21 Node 32 ,42  14370 Mode  ---  14403 xxxx
  03528 ----------------------------------------------------------------------------------x- 
  03612 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03696 ------------------------------------------------------------------------------------ 
-Pin #20 Node 31 ,41  14373 Mode  ---  14407 xxxx 
+Pin #20 Node 31 ,41  14373 Mode  --x  14407 xxxx 
  03780 ----------------------x--------x---------------------------------------------------- 
  03864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03948 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -394,7 +397,7 @@ Pin #20 Node 31 ,41  14373 Mode  ---  14407 xxxx
  05124 ----------------------------------------------------------------------------------x- 
  05208 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05292 ------------------------------------------------------------------------------------ 
-Pin #19 Node 30 ,40  14376 Mode  ---  14411 xxxx 
+Pin #19 Node 30 ,40  14376 Mode  --x  14411 xxxx 
  05376 ----------------------x-------x--------x-------------------------------------------- 
  05460 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05544 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -492,8 +495,8 @@ Pin #15 Node 26 ,36  14388 Mode  -x-  14427 xxxx
  12936 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13020 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13104 ------------------------------------------------------------------------------------ 
-Pin #14 Node 25 ,35  14391 Mode  x-x  14431 xxxx 
- 13188 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14 Node 25 ,35  14391 Mode  ---  14431 xxxx 
+ 13188 ----------------------x-------x-------x--------------------------------------------- 
  13272 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13356 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -505,7 +508,7 @@ Pin #14 Node 25 ,35  14391 Mode  x-x  14431 xxxx
  13944 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  14028 ----------------------------------------------------------------------------------x- 
  14112 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 14196 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 14196 ------------------------------------------------------------------------------------ 
 
 
 LEGEND    X : fuse not blown 
@@ -521,8 +524,8 @@ LEGEND    X : fuse not blown
                           x---|2           23|---x K_OE                     
                      KVAL x---|3           22|---x A1                       
                   TXREADY x---|4           21|---x A0                       
-                          x---|5           20|---x nRD                      
-                          x---|6           19|---x nWR                      
+                          x---|5           20|---x !nRD                     
+                          x---|6           19|---x !nWR                     
                           x---|7           18|---x ARB2                     
                           x---|8           17|---x ARB1                     
                           x---|9           16|---x ARB0                     

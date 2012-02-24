@@ -20,8 +20,8 @@ PIN    15 = LOAD                        ; /*                                 */
 PIN    16 =   ARB0                      ; /*                                 */ 
 PIN 	17 =	ARB1;
 PIN    18 = ARB2;
-PIN	19 = nWR;
-PIN 	20 = nRD;
+PIN	19 = !nWR;
+PIN 	20 = !nRD;
 PIN	21 = A0;
 PIN	22 = A1;
 PIN    23 = K_OE;
@@ -92,7 +92,7 @@ SEQUENCE [ARB2,ARB1,ARB0]{
 		OUT PnG, nWR,K_OE;
 		NEXT 7;
 	PRESENT 7:
-		OUT PnG,K_ACK,K_OE;
+		OUT PnG,KACK,K_OE;
 		IF KVAL NEXT 7;
 		IF !KVAL NEXT 6;
 	PRESENT 6:
